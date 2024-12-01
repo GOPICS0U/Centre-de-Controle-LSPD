@@ -11,141 +11,234 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
 
     <style>
-        /* Reset CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #ffffff;
-            color: #333;
-            line-height: 1.6;
-        }
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
+}
 
-        /* Barre de navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #3498db;
-            color: white;
-            padding: 15px 0;
-            z-index: 1000;
-        }
+/* Modale */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
 
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-out;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            margin-left: 20px;
-            transition: color 0.3s;
-        }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
-        nav a:hover {
-            color: #2980b9;
-        }
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
 
-        nav .logo {
-            font-weight: 700;
-            font-size: 1.6rem;
-        }
+.modal-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #3498db;
+}
 
-        /* Section hero avec image de fond */
-        header {
-            height: 100vh;
-            background-image: url('image1.png');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-        }
+.modal-footer button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-        header .content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-        }
+.modal-footer button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
 
-        header h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-        }
+.modal-footer .close-btn {
+    background-color: #e74c3c;
+}
 
-        header p {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-        }
+.modal-footer .close-btn:hover {
+    background-color: #c0392b;
+}
 
-        /* Boutons */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1.1rem;
+    transition: border 0.3s ease;
+}
 
-        .button-container button {
-            background-color: #3498db;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            width: 250px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            text-align: left;
-        }
+input[type="text"]:focus, input[type="password"]:focus {
+    border: 1px solid #3498db;
+    outline: none;
+}
 
-        .button-container button:hover {
-            background-color: #2980b9;
-            transform: translateY(-3px);
-        }
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+    padding: 15px 0;
+    z-index: 1000;
+}
 
-        .button-container button:active {
-            background-color: #1c638b;
-            transform: translateY(1px);
-        }
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
 
-        .button-container button .material-icons {
-            margin-right: 15px;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
 
-        /* Sections supplémentaires */
-        section {
+nav a:hover {
+    color: #2980b9;
+}
+
+nav .logo {
+    font-weight: 700;
+    font-size: 1.6rem;
+}
+
+/* Section Hero */
+header {
+    height: 100vh;
+    background-image: url('image1.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+header .content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+header h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+header p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.button-container button {
+    background-color: #3498db;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 250px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+}
+
+.button-container button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+.button-container button:active {
+    background-color: #1c638b;
+    transform: translateY(1px);
+}
+
+.button-container button .material-icons {
+    margin-right: 15px;
+}
+
+/* Sections supplémentaires */
+section {
             padding: 80px 20px;
             text-align: center;
             background-color: #1a202c; /* Le fond de la page sera noir */
@@ -160,39 +253,72 @@
         section p {
             font-size: 1.1rem;
             margin-bottom: 30px;
+
         }
+        
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
 
-        /* Footer */
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+footer p {
+    font-size: 1rem;
+}
 
-        footer p {
-            font-size: 1rem;
-        }
+/* Responsivité */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
 
-        /* Responsivité */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
-            }
+    header p {
+        font-size: 1.2rem;
+    }
 
-            header p {
-                font-size: 1.2rem;
-            }
+    .button-container button {
+        width: 100%;
+        font-size: 1rem;
+    }
 
-            .button-container button {
-                width: 100%;
-                font-size: 1rem;
-            }
-        }
+    .modal-content {
+        padding: 20px;
+        max-width: 90%;
+    }
+}
     </style>
 </head>
 
 <body>
+
+    <!-- Modale de connexion / inscription -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Connexion ou Inscription</h2>
+            </div>
+            <!-- Formulaires -->
+            <form id="login-form">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
+                
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+                
+                <div class="modal-footer">
+                    <button type="submit">Se connecter</button>
+                    <button type="button" class="close-btn" onclick="closeModal()">Fermer</button>
+                </div>
+            </form>
+
+            <div class="modal-footer">
+                <button onclick="showRegisterForm()">S'inscrire</button>
+                <button onclick="showLoginForm()">Se connecter</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav>
@@ -202,7 +328,6 @@
                 <a href="#section1">Accueil</a>
                 <a href="#section2">À Propos</a>
                 <a href="#section3">Contact</a>
-                <a href="backend.php?logout=true">Se déconnecter</a>
             </div>
         </div>
     </nav>
@@ -227,14 +352,55 @@
     </header>
 
     <script>
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        // Fermeture de la modale
+        function closeModal() {
+            document.getElementById('login-modal').style.display = 'none';
+        }
+
+        // Montrer le formulaire d'inscription
+        function showRegisterForm() {
+            const modalContent = document.querySelector('.modal-content');
+            modalContent.innerHTML = `
+                <div class="modal-header">
+                    <h2>Inscription</h2>
+                </div>
+                <form id="register-form">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+                    <div class="modal-footer">
+                        <button type="submit">S'inscrire</button>
+                        <button type="button" class="close-btn" onclick="closeModal()">Fermer</button>
+                    </div>
+                </form>
+            `;
+        }
+
+        // Montrer le formulaire de connexion
+        function showLoginForm() {
+            const modalContent = document.querySelector('.modal-content');
+            modalContent.innerHTML = `
+                <div class="modal-header">
+                    <h2>Connexion</h2>
+                </div>
+                <form id="login-form">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+                    <div class="modal-footer">
+                        <button type="submit">Se connecter</button>
+                        <button type="button" class="close-btn" onclick="closeModal()">Fermer</button>
+                    </div>
+                </form>
+            `;
+        }
+
+        // Affichage initial de la modale
+        window.onload = function() {
+            document.getElementById('login-modal').style.display = 'flex';
+        };
     </script>
     
     <!-- Section 1 - Accueil -->
