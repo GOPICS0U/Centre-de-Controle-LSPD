@@ -1,7 +1,7 @@
 {
     "name": "Centre de controle LSPD",
-    "short_name": "LSPD APP",
-    "description": "sert au agent du LSPD pour créer des rapport plus facilement",
+    "short_name": "LSPD",
+    "description": "permet au agents de faire des rapports plus rapidement",
     "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#1a202c",
