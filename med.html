@@ -337,6 +337,10 @@
             const lawyer = document.getElementById('lawyer').value;
             const court = document.getElementById('court').value;
             const officerId = document.getElementById('officerId').value;
+            const dateISO = "2024-12-01T14:30:00";
+            const dateSansT = dateISO.replace("T", " ");
+            console.log(dateSansT); // "2024-12-01 14:30:00"
+
 
             // Update preview
             document.getElementById('previewObjectDate').textContent = objectDate;
