@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générer un Rapport</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+            margin: 0;
+        }
+    
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #2980b9;
+            color: white;
+            padding: 15px 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    
+        nav .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+    
+        header {
+            text-align: center;
+            background: linear-gradient(135deg, #2d3748, #2d3748);
+            color: #ffffff;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px solid #161629;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+    
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+            animation: rotateBackground 10s linear infinite;
+            z-index: 0;
+        }
+    
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            z-index: 1;
+            position: relative;
+        }
+    
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            z-index: 1;
+            position: relative;
+        }
+    
+        @keyframes rotateBackground {
+            0% {
+                transform: rotate(0deg);
+            }
+    
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 80px auto 20px;
+            padding: 20px;
+        }
+    
+        .form-container .container {
+            width: 48%;
+            background-color: #2d3748;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+    
+        .form-group {
+            margin-bottom: 20px;
+        }
+    
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+    
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 95%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #4a5568;
+            border-radius: 5px;
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+    
+        .form-group textarea {
+            resize: vertical;
+        }
+    
+        button {
+            display: inline-block;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    
+        button:hover {
+            background-color: #1f6f8b;
+        }
+    
+        .preview-container {
+            padding: 20px;
+            background-color: #2d3748;
+            border-radius: 10px;
+        }
+    
+        .preview-item {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+    
+        .preview-item span {
+            font-weight: bold;
+        }
+    
+        textarea.preview-textarea {
+            width: 93%;
+            height: 600px;
+            padding: 15px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            background-color: #1a202c;
+            border: 1px solid #4a5568;
+            border-radius: 8px;
+            resize: none;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .btn-copy {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+            background-color: #3b82f6;
+        }
+    
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    
+        footer p {
+            font-size: 1rem;
+        }
+    
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #f9f9f9;
+                color: #1a202c;
+            }
+    
+            .form-group input,
+            .form-group textarea,
+            .preview-container {
+                background-color: #ffffff;
+                color: #1a202c;
+                border-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">LSPD - Alkia RP</div>
+    </nav>
+    
+    <!-- Form and Preview Section -->
+    <div class="form-container">
+        <!-- Form Section -->
+        <div class="container">
+            <h2>Formulaire de Rapport</h2>
+            <form id="policeReportForm">
+                <!-- Informations sur le Rapport -->
+                <div class="form-group">
+                    <label for="reportDate">Date :</label>
+                    <input type="date" id="reportDate" name="reportDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="reportNumber">N° de Rapport :</label>
+                    <input type="text" id="reportNumber" name="reportNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="reportLocation">Lieu :</label>
+                    <input type="text" id="reportLocation" name="reportLocation" required>
+                </div>
+
+                <!-- LSPD Information -->
+                <div class="form-group">
+                    <label for="officerNumber">N° Officier :</label>
+                    <input type="text" id="officerNumber" name="officerNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="officerName">Nom Officier :</label>
+                    <input type="text" id="officerName" name="officerName" required>
+                </div>
+
+                <!-- Type d'incident -->
+                <div class="form-group">
+                    <label for="incidentType">Type d'incident :</label>
+                    <select id="incidentType" name="incidentType" required>
+                        <option value="PLAINTE">Plainte</option>
+                        <option value="MAIN COURANTE">Main Courante</option>
+                        <option value="INTERPELLATION">Interpellation</option>
+                        <option value="BRAQUAGE">Braquage</option>
+                        <option value="AUTRE">Autre</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="incidentDetails">Si autre, précisez :</label>
+                    <input type="text" id="incidentDetails" name="incidentDetails">
+                </div>
+
+                <!-- Type d'Incident -->
+                <div class="form-group">
+                    <label for="incidentNature">Type D’Incident :</label>
+                    <select id="incidentNature" name="incidentNature" required>
+                        <option value="Accident de la route">Accident de la route</option>
+                        <option value="Fusillade">Fusillade</option>
+                        <option value="Agression">Agression</option>
+                        <option value="Disparition">Disparition</option>
+                        <option value="Arrestation">Arrestation</option>
+                        <option value="PRISE D'OTAGE">Prise d'otage</option>
+                        <option value="Vol">Vol</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="incidentOther">Autre, précisez :</label>
+                    <input type="text" id="incidentOther" name="incidentOther">
+                </div>
+
+                <!-- Information Victime / Prévenu -->
+                <h3>Informations Victime / Prévenu :</h3>
+                <div class="form-group">
+                    <label for="victimName">Nom :</label>
+                    <input type="text" id="victimName" name="victimName" required>
+                </div>
+                <div class="form-group">
+                    <label for="victimFirstName">Prénom :</label>
+                    <input type="text" id="victimFirstName" name="victimFirstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="victimAge">Âge :</label>
+                    <input type="number" id="victimAge" name="victimAge" required>
+                </div>
+                <div class="form-group">
+                    <label for="victimPhone">N° Téléphone :</label>
+                    <input type="tel" id="victimPhone" name="victimPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="victimProfession">Profession :</label>
+                    <input type="text" id="victimProfession" name="victimProfession" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="vehicleInfo">N° Immatriculation / Type Véhicule / Couleur :</label>
+                    <input type="text" id="vehicleInfo" name="vehicleInfo" required>
+                </div>
+
+                <!-- Circonstances et Détails -->
+                <div class="form-group">
+                    <label for="incidentDetails">Détails de l’incident :</label>
+                    <textarea id="incidentDetails" name="incidentDetails" required></textarea>
+                </div>
+
+                <!-- Informations complémentaires -->
+                <div class="form-group">
+                    <label for="witnesses">Témoignages :</label>
+                    <textarea id="witnesses" name="witnesses"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="evidence">Pièces au dossier :</label>
+                    <input type="text" id="evidence" name="evidence">
+                </div>
+
+                <!-- Dégâts et Identification du corps -->
+                <div class="form-group">
+                    <label for="damage">Dégâts corporels :</label>
+                    <select id="damage" name="damage" required>
+                        <option value="Minimes">Minimes</option>
+                        <option value="Importants">Importants</option>
+                        <option value="Rapport médical annexé">Rapport médical annexé</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="corpseIdentification">Identification du corps :</label>
+                    <textarea id="corpseIdentification" name="corpseIdentification"></textarea>
+                </div>
+
+                <!-- Date et signature -->
+                <div class="form-group">
+                    <label for="reportDateWritten">Rédigé le :</label>
+                    <input type="date" id="reportDateWritten" name="reportDateWritten" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="officerSignature">Signature de l’officier :</label>
+                    <input type="text" id="officerSignature" name="officerSignature" required>
+                </div>
+
+                <button type="submit">Générer le Rapport</button>
+            </form>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="container preview-container">
+            <h2>Prévisualisation du Rapport</h2>
+            <div class="preview-item">
+                <span>Date : </span><span id="previewDate"></span>
+            </div>
+            <div class="preview-item">
+                <span>N° de Rapport : </span><span id="previewReportNumber"></span>
+            </div>
+            <div class="preview-item">
+                <span>Lieu : </span><span id="previewReportLocation"></span>
+            </div>
+            <div class="preview-item">
+                <span>LSPD : </span><span id="previewLSPD"></span>
+            </div>
+            <div class="preview-item">
+                <span>N° Officier : </span><span id="previewOfficerNumber"></span>
+            </div>
+            <div class="preview-item">
+                <span>Nom Officier : </span><span id="previewOfficerName"></span>
+            </div>
+            <div class="preview-item">
+                <span>Type d'incident : </span><span id="previewIncidentType"></span>
+            </div>
+            <div class="preview-item">
+                <span>Victime Nom : </span><span id="previewVictimName"></span>
+            </div>
+            <div class="preview-item">
+                <span>Victime Prénom : </span><span id="previewVictimFirstName"></span>
+            </div>
+            <textarea class="preview-textarea" id="reportPreviewText" readonly></textarea>
+
+            <button class="btn-copy" onclick="copyText()">Copier le rapport</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('policeReportForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            generateReport();
+        });
+
+        function generateReport() {
+            const reportDate = document.getElementById('reportDate').value;
+            const reportNumber = document.getElementById('reportNumber').value;
+            const reportLocation = document.getElementById('reportLocation').value;
+            const officerNumber = document.getElementById('officerNumber').value;
+            const officerName = document.getElementById('officerName').value;
+            const incidentType = document.getElementById('incidentType').value;
+            const incidentDetails = document.getElementById('incidentDetails').value;
+            const victimName = document.getElementById('victimName').value;
+            const victimFirstName = document.getElementById('victimFirstName').value;
+            const victimAge = document.getElementById('victimAge').value;
+            const victimPhone = document.getElementById('victimPhone').value;
+            const victimProfession = document.getElementById('victimProfession').value;
+            const vehicleInfo = document.getElementById('vehicleInfo').value;
+            const witnesses = document.getElementById('witnesses').value;
+            const evidence = document.getElementById('evidence').value;
+            const damage = document.getElementById('damage').value;
+            const corpseIdentification = document.getElementById('corpseIdentification').value;
+            const reportDateWritten = document.getElementById('reportDateWritten').value;
+            const officerSignature = document.getElementById('officerSignature').value;
+
+            // Update preview
+            document.getElementById('previewDate').textContent = reportDate;
+            document.getElementById('previewReportNumber').textContent = reportNumber;
+            document.getElementById('previewReportLocation').textContent = reportLocation;
+            document.getElementById('previewLSPD').textContent = 'LSPD';
+            document.getElementById('previewOfficerNumber').textContent = officerNumber;
+            document.getElementById('previewOfficerName').textContent = officerName;
+            document.getElementById('previewIncidentType').textContent = incidentType;
+            document.getElementById('previewVictimName').textContent = victimName;
+            document.getElementById('previewVictimFirstName').textContent = victimFirstName;
+
+            const reportText = `
+Rapport de Police - N° ${reportNumber}  
+Date : ${reportDate}  
+Lieu : ${reportLocation}  
+
+LSPD :  
+N° Officier : ${officerNumber}  
+Nom Officier : ${officerName}  
+
+Type d'incident : ${incidentType}  
+
+Informations Victime / Prévenu :  
+Nom : ${victimName}  
+Prénom : ${victimFirstName}  
+Âge : ${victimAge}  
+N° Téléphone : ${victimPhone}  
+Profession : ${victimProfession}  
+
+Détails de l’incident :  
+${incidentDetails}  
+
+Témoignages : ${witnesses}  
+Pièces au dossier : ${evidence}  
+Dégâts : ${damage}  
+
+Rédigé le : ${reportDateWritten}  
+Signature de l’officier : ${officerSignature}
+            `;
+            document.getElementById('reportPreviewText').value = reportText;
+        }
+
+        function copyText() {
+            const text = document.getElementById('reportPreviewText');
+            text.select();
+            document.execCommand('copy');
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Système de Gestion des Détentions - LSPD - P1CS0U. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
