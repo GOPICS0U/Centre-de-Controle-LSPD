@@ -82,6 +82,13 @@
             }
         }
 
+        #logo {
+            position: absolute;
+            right:3%;
+            top:0,05;
+            width: 50px;
+        }
+
         .form-container {
             display: flex;
             justify-content: space-between;
@@ -212,6 +219,7 @@
     <!-- Navigation -->
     <nav>
         <div class="logo">LSPD - Alkia RP</div>
+        <img src="logo.png" alt= "logo-lspd" id="logo"/>
     </nav>
 
     <!-- Header -->
@@ -229,6 +237,10 @@
                 <div class="form-group">
                     <label for="objectType">Type d'objet :</label>
                     <input type="text" id="objectType" name="objectType" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Quantité :</label>
+                    <input type="number" id="amount" name="amount" required>
                 </div>
                 <div class="form-group">
                     <label for="suspectName">Nom du suspect :</label>
@@ -252,6 +264,7 @@
             <div class="preview-container">
                 <div class="preview-item"><span>Date :</span> <span id="previewDate">Non renseigné</span></div>
                 <div class="preview-item"><span>Type d'objet :</span> <span id="previewObjectType">Non renseigné</span></div>
+                <div class="preview-item"><span>Quantité :</span> <span id="previewAmount">Non renseigné</span></div>
                 <div class="preview-item"><span>Nom du suspect :</span> <span id="previewSuspect">Non renseigné</span></div>
                 <textarea id="reportPreviewText" class="preview-textarea" readonly></textarea>
                 <button class="btn-copy" onclick="copyText()">Copier</button>
@@ -265,6 +278,7 @@
 
         function updatePreview() {
             const objectType = document.getElementById('objectType').value || "Non renseigné";
+            const amount = document.getElementById('amount').value || "Non renseigné";
             const suspectName = document.getElementById('suspectName').value || "Non renseigné";
             const seizingAgent = document.getElementById('seizingAgent').value || "Non renseigné";
             const objectDate = document.getElementById('objectDate').value;
@@ -272,12 +286,14 @@
 
             document.getElementById('previewDate').textContent = formattedDate;
             document.getElementById('previewObjectType').textContent = objectType;
+            document.getElementById('previewAmount').textContent = amount;
             document.getElementById('previewSuspect').textContent = suspectName;
             
             document.getElementById('reportPreviewText').value = `
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 🗓️ Date : ${formattedDate}
 💉 Type d'objet : ${objectType}
+📦 Quantité : ${amount}
 👤 Nom du suspect : ${suspectName}
 👮‍♂️ Agent ayant saisi : ${seizingAgent}
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
