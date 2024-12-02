@@ -34,6 +34,7 @@
             font-size: 1.5rem;
         }
     
+        /* Header animations */
         header {
             text-align: center;
             background: linear-gradient(135deg, #2d3748, #2d3748);
@@ -43,8 +44,9 @@
             overflow: hidden;
             border-bottom: 5px solid #161629;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: slideDown 1s ease-out forwards;
         }
-    
+
         header::before {
             content: '';
             position: absolute;
@@ -56,39 +58,92 @@
             animation: rotateBackground 10s linear infinite;
             z-index: 0;
         }
-    
+
         header h1 {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 15px;
             z-index: 1;
             position: relative;
+            opacity: 0;
+            animation: fadeInText 1.5s ease-out forwards;
         }
-    
+
         header p {
             font-size: 1.2rem;
             margin-top: 10px;
             z-index: 1;
             position: relative;
+            opacity: 0;
+            animation: fadeInText 2s ease-out forwards;
+            animation-delay: 0.5s;
         }
-    
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         @keyframes rotateBackground {
             0% {
                 transform: rotate(0deg);
             }
-    
             100% {
                 transform: rotate(360deg);
             }
         }
-        
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
         #logo {
             position: absolute;
-            right:3%;
-            top:0,05;
+            right: 3%;
+            top: 5%;
             width: 50px;
+            animation: fadeInLogo 2s ease-out forwards;
         }
-        
+
+        @keyframes fadeInLogo {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    
+        /* Form and Preview containers */
         .form-container {
             display: flex;
             justify-content: space-between;
@@ -96,6 +151,8 @@
             max-width: 1200px;
             margin: 80px auto 20px;
             padding: 20px;
+            opacity: 0;
+            animation: scaleUp 1s ease-out forwards; /* Apply pop effect */
         }
     
         .form-container .container {
@@ -151,6 +208,8 @@
             padding: 20px;
             background-color: #2d3748;
             border-radius: 10px;
+            opacity: 0;
+            animation: scaleUp 1s ease-out forwards; /* Apply pop effect */
         }
     
         .preview-item {
@@ -175,6 +234,15 @@
             resize: none;
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-text {
+            width: 100%;
+            padding: 15px;
+            margin-left: 15%;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            color: rgb(172, 0, 0);
         }
     
         .btn-copy {
@@ -212,6 +280,7 @@
             }
         }
     </style>
+    
 </head>
 <body>
     <!-- Navigation -->
@@ -360,7 +429,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="officerSignature">Signature de l’officier :</label>
+                    <label for="officerSignature">Signature de l’officier (ID Discord):</label>
                     <input type="text" id="officerSignature" name="officerSignature" required>
                 </div>
 
@@ -399,6 +468,8 @@
                 <span>Victime Prénom : </span><span id="previewVictimFirstName"></span>
             </div>
             <textarea class="preview-textarea" id="reportPreviewText" readonly></textarea>
+
+            <div id="InfoText" class="info-text"><strong><p>/!\ ajouter des photos directements sur Discord /!\</p></strong></div>
 
             <button class="btn-copy" onclick="copyText()">Copier le rapport</button>
         </div>
@@ -468,7 +539,7 @@ Pièces au dossier : ${evidence}
 Dégâts : ${damage}  
 
 Rédigé le : ${reportDateWritten}  
-Signature de l’officier : ${officerSignature}
+Signature de l’officier : <@${officerSignature}>
             `;
             document.getElementById('reportPreviewText').value = reportText;
         }

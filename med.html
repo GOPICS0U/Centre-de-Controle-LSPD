@@ -12,7 +12,8 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #1a202c;
             color: #e2e8f0;
-            margin: 0;
+            overflow-x: hidden;
+            animation: fadeIn 2s ease-out;
         }
 
         nav {
@@ -35,6 +36,7 @@
             font-size: 1.5rem;
         }
 
+        /* Header animations */
         header {
             text-align: center;
             background: linear-gradient(135deg, #2d3748, #2d3748);
@@ -44,6 +46,7 @@
             overflow: hidden;
             border-bottom: 5px solid #161629;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: slideDown 1s ease-out forwards;
         }
 
         header::before {
@@ -64,6 +67,8 @@
             margin-bottom: 15px;
             z-index: 1;
             position: relative;
+            opacity: 0;
+            animation: fadeInText 1.5s ease-out forwards;
         }
 
         header p {
@@ -71,6 +76,36 @@
             margin-top: 10px;
             z-index: 1;
             position: relative;
+            opacity: 0;
+            animation: fadeInText 2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes rotateBackground {
@@ -82,11 +117,32 @@
             }
         }
 
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
         #logo {
             position: absolute;
-            right:3%;
-            top:0,05;
+            right: 3%;
+            top: 5%;
             width: 50px;
+            animation: fadeInLogo 2s ease-out forwards;
+        }
+
+        @keyframes fadeInLogo {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         .form-container {
@@ -96,6 +152,8 @@
             max-width: 1200px;
             margin: 80px auto 20px;
             padding: 20px;
+            opacity: 0;
+            animation: scaleUp 1s ease-out forwards;
         }
 
         .form-container .container {
@@ -126,6 +184,14 @@
             border-radius: 5px;
             background-color: #1a202c;
             color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #2980b9;
+            box-shadow: 0 0 5px #2980b9;
         }
 
         .form-group textarea {
@@ -141,21 +207,27 @@
             border-radius: 5px;
             font-size: 1rem;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
             background-color: #1f6f8b;
+            transform: scale(1.05);
         }
 
         .preview-container {
             padding: 20px;
             background-color: #2d3748;
             border-radius: 10px;
+            opacity: 0;
+            animation: scaleUp 1s ease-out forwards;
         }
 
         .preview-item {
             margin-bottom: 15px;
             font-size: 1.1rem;
+            opacity: 0;
+            animation: fadeInText 1s ease-out forwards;
         }
 
         .preview-item span {
@@ -175,6 +247,16 @@
             resize: none;
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .info-text {
+            width: 100%;
+            padding: 15px;
+            margin-left: 15%;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            color: rgb(172, 0, 0);
         }
 
         .btn-copy {
@@ -183,6 +265,13 @@
             text-align: center;
             margin-top: 10px;
             background-color: #3b82f6;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-copy:hover {
+            background-color: #1e68b5;
         }
 
         /* Footer */
@@ -192,6 +281,7 @@
             color: white;
             padding: 20px;
             text-align: center;
+            animation: fadeIn 2s ease-out;
         }
 
         footer p {
@@ -324,6 +414,8 @@
 
             <textarea class="preview-textarea" id="reportPreviewText" readonly></textarea>
 
+            <div id="InfoText" class="info-text"><strong><p>/!\ ajouter des photos directements sur Discord /!\</p></strong></div>
+
             <button class="btn-copy" onclick="copyText()">Copier le rapport</button>
         </div>
     </div>
@@ -372,7 +464,7 @@
             🎒 Biens personnels à rendre : ${returnItems}
             👨‍🎓 Avocat : ${lawyer}
             ⚖️ Comparution : ${court}
-            👮‍♂️ Cloturé par : ${officerId}
+            👮‍♂️ Cloturé par : <@${officerId}>
             ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
             `;
             document.getElementById('reportPreviewText').value = reportText;
@@ -383,6 +475,19 @@
             text.select();
             document.execCommand('copy');
         }
+
+        // JavaScript for form interaction and preview
+        document.getElementById('objectReportForm').addEventListener('input', function () {
+            const previewText = "Prévisualisation du Rapport ici...";
+            document.getElementById('reportPreviewText').value = previewText;
+        });
+
+        document.getElementById('copyButton').addEventListener('click', function () {
+            const textToCopy = document.getElementById('reportPreviewText').value;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Le texte a été copié !');
+            });
+        });
     </script>
 
     <!-- Footer -->
