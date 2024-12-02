@@ -2,6 +2,7 @@ Description:
 Centre de Contrôle LSPD est un site web conçu pour offrir une expérience utilisateur fluide et moderne. Ce projet, hébergé sur Netlify, met en avant un design épuré et responsive, adapté à différents appareils.
 
 
+--------------------------------------------------------------------------------------
 
 
 Fonctionnalités:
@@ -10,6 +11,7 @@ Navigation simple et intuitive.
 Chargement rapide grâce à des optimisations modernes.
 
 
+--------------------------------------------------------------------------------------
 
 
 Technologies Utilisées:
@@ -18,6 +20,7 @@ CSS3 pour le design et la mise en page.
 JavaScript pour l’interactivité.
 
 
+--------------------------------------------------------------------------------------
 
 
 Structure :
@@ -38,12 +41,14 @@ root/
 ├── README.md          # Documentation
 
 
+--------------------------------------------------------------------------------------
 
 
 Contribuer:
 Les contributions sont les bienvenues !
 
 
+--------------------------------------------------------------------------------------
 
 
 Contact:
