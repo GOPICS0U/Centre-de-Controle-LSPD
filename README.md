@@ -35,4 +35,4 @@ Pour toute question ou suggestion, contactez-moi à :
 
 
 Licence
-Ce projet est distribué sous licence MIT. Consultez le fichier LICENSE pour plus d’informations.
+Ce projet est distribué sous licence MIT.
