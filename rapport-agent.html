@@ -18,8 +18,8 @@
 
     <!-- Header -->
     <header>
-        <h1>Générer un Rapport de Saisie d'Objet</h1>
-        <p>Remplissez le formulaire pour générer automatiquement un rapport de saisie d'objet.</p>
+        <h1>Générer un Rapport sur agent</h1>
+        <p>Remplissez le formulaire pour générer automatiquement un rapport sur agent.</p>
     </header>
 
     <!-- Form and Preview Section -->
@@ -42,34 +42,12 @@
                 </div>
                 <div id="InfoID" class="info-ID"><strong><p>/!\ (EX:<@0000000000000>) /!\</p></strong></div>
                 <div class="form-group">
-                    <label for="object">Objet saisi :</label>
+                    <label for="object">Agent(s) Inculpé(s) :</label>
                     <input type="text" id="object" name="object" required>
-                </div>
-                <!-- Thème du rapport -->
-                <div class="form-group">
-                    <label for="theme">Choisir un thème de rapport :</label>
-                    <select id="theme" name="theme"s required>
-                        <option value="standard">Rapport Standard</option>
-                        <option value="emergency">Rapport d'Urgence</option>
-                        <option value="hostage">Rapport Prise d'Otage</option>
-                        <option value="theft">Rapport Vol</option>
-                    </select>
                 </div>
                 <div class="form-group">
                     <label for="facts">Déroulement des faits :</label>
                     <textarea id="facts" name="facts" rows="5" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="situation">Situation sur place :</label>
-                    <textarea id="situation" name="situation" rows="5" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="hostages">Les individus :</label>
-                    <textarea id="hostages" name="hostages" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="postHostage">Déroulement après la situation :</label>
-                    <textarea id="postHostage" name="postHostage" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="observations">Observations supplémentaires :</label>
@@ -89,14 +67,11 @@
             <h2>Prévisualisation</h2>
             <div class="preview-container">
                 <div class="preview-item"><span>Agents impliqués :</span> <span id="previewOfficers">Non renseigné</span></div>
-                <div class="preview-item"><span>Objet :</span> <span id="previewObject">Non renseigné</span></div>
+                <div class="preview-item"><span>Agent(s) Inculpé(s) :</span> <span id="previewObject">Non renseigné</span></div>
                 <div class="preview-item"><span>Date :</span> <span id="previewDate">Non renseigné</span></div>
                 <div class="preview-item"><span>Déroulement des faits :</span> <span id="previewFacts">Non renseigné</span></div>
-                <div class="preview-item"><span>Situation sur place :</span> <span id="previewSituation">Non renseigné</span></div>
                 <div class="preview-item"><span>Observations :</span> <span id="previewObservations">Non renseigné</span></div>
                 <textarea class="preview-textarea" id="reportPreviewText" readonly></textarea>
-
-                <div id="InfoText" class="info-text"><strong><p>/!\ ajouter des photos directement sur Discord /!\</p></strong></div>
 
                 <button class="btn-copy" onclick="copyText()">Copier le rapport</button>
             </div>
@@ -110,36 +85,16 @@
             const officers = document.getElementById('officers').value.split("\n").map(id => id.trim()).join(", ");
             const object = document.getElementById('object').value;
             const facts = document.getElementById('facts').value;
-            const situation = document.getElementById('situation').value;
-            const hostages = document.getElementById('hostages').value;
-            const postHostage = document.getElementById('postHostage').value;
             const observations = document.getElementById('observations').value;
             const agentSignature = document.getElementById('agentSignature').value;
-            const theme = document.getElementById('theme').value; // Récupération du thème sélectionné
 
-            let themeText = '';
             let additionalInfo = '';
-
-            // Personnalisation du rapport en fonction du thème
-            if (theme === 'emergency') {
-                themeText = "🚨 RAPPORT D'URGENCE 🚨\n\n";
-                additionalInfo = "Actions urgentes entreprises :...\n";
-            } else if (theme === 'hostage') {
-                themeText = "⚠️ RAPPORT PRISE D'OTAGE ⚠️\n\n";
-                additionalInfo = "Prise d'otages confirmée, négociations en cours...\n";
-            } else if (theme === 'theft') {
-                themeText = "🚔 RAPPORT VOL 🚔\n\n";
-                additionalInfo = "Vol suspecté dans le quartier X, enquête en cours...\n";
-            } else {
-                themeText = "📝 RAPPORT STANDARD 📝\n\n";
-            }
 
             // Mise à jour de la prévisualisation
             document.getElementById('previewOfficers').textContent = officers;
             document.getElementById('previewObject').textContent = object;
             document.getElementById('previewDate').textContent = date;
             document.getElementById('previewFacts').textContent = facts;
-            document.getElementById('previewSituation').textContent = situation;
             document.getElementById('previewObservations').textContent = observations;
 
             const reportText = `
@@ -147,23 +102,18 @@
 **Service :** ${service}  
 **Date :** ${date}  
 
-${themeText}
+-------------------------------------
 
 **Agents impliqués :** ${officers}
 
-Objet : ${object}  
-**Déroulement des faits :** ${facts}  
-
-**Situation sur place :** ${situation}  
-
-**Les individus :**
-${hostages}
-
-**Déroulement après la situation :** ${postHostage}  
+**Agent(s) Inculpé(s) :** ${object}  
+**Déroulement des faits :** ${facts}   
 
 **Observations supplémentaires :** ${observations}
 
 ${additionalInfo}
+
+-------------------------------------
 
 Signature de l'agent : <@${agentSignature}>
             `;

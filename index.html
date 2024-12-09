@@ -12,7 +12,7 @@
     <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="picsou.png">
+    <link rel="icon" type="image/png" href="img/picsou.png">
 
     <style>
         /* Base Reset */
@@ -71,7 +71,7 @@
         /* Header Section */
         header {
             height: 100vh;
-            background: url('image1.png') center/cover no-repeat;
+            background: url('img/image1.png') center/cover no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -104,7 +104,7 @@
 
         header p {
             font-size: 1.5rem;
-            margin-bottom: 30px;
+            margin: 10px;
         }
 
         /* Buttons */
@@ -149,6 +149,26 @@
             max-width: 800px;
             margin: auto;
             animation: fadeIn 1s ease-in-out;
+        }
+
+        .section-content-button {
+            background: #2980b9;
+            color: #fff;
+            border: none;
+            margin-left: 25%;
+            margin-right: 25%;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: center;
+            align-items: center;
+            transition: 0.3s, transform 0.3s;
+        }
+
+        .section-content-button:hover {
+            background: #1c638b;
+            transform: scale(1.05);
         }
 
         section h2 {
@@ -208,7 +228,7 @@
         <div class="container">
             <div class="logo">LSPD - Alkia RP</div>
             <div>
-                <a href="#section1">Accueil</a>
+                <a href="#section4">Rapports</a>
                 <a href="#section2">À Propos</a>
                 <a href="#section3">Contact</a>
                 <a href="https://discord.gg/ZkBRNTHP">Discord</a>
@@ -216,14 +236,14 @@
         </div>
     </nav>
 
-    <!-- Header -->
-    <header>
+    <header class="header-container">
         <div class="content">
             <h1>Centre de Contrôle LSPD</h1>
             <p>Gérez vos rapports et interventions en toute simplicité.</p>
+            <p>Pour plus d'options voir en bas.</p>
             <div class="button-container">
                 <button onclick="window.location.href='med.html'">
-                    <span class="material-icons">assignment</span> Générer MED
+                    <span class="material-icons">assignment</span> Générer M.E.D.
                 </button>
                 <button onclick="window.location.href='rapport.html'">
                     <span class="material-icons">report</span> Créer Rapport
@@ -231,19 +251,30 @@
                 <button onclick="window.location.href='saisie.html'">
                     <span class="material-icons">insert_drive_file</span> Saisie d'Objet
                 </button>
-                <button onclick="window.location.href='plainte.html'">
-                    <span class="material-icons">download</span> Créer plainte
-                </button>
             </div>
         </div>
-    </header>
+    </header>    
 
     <!-- Section 1 - Accueil -->
     <section id="section1" class="welcome-section">
         <div class="section-content">
             <h2>Bienvenue</h2>
             <p>Plongez dans notre plateforme intuitive pour une gestion efficace de vos dossiers et rapports. Simplifiez vos opérations avec des outils conçus pour répondre à vos besoins professionnels.</p>
-            <a href="#section2" class="cta-button">En savoir plus</a>
+        </div>
+    </section>
+
+    <!-- Section 4 - BOUTONS -->
+    <section id="section4" class="button-section">
+        <div class="section-content">
+            <h2>Rapports</h2>
+            <div class="button-container">
+                <button onclick="window.location.href='plainte.html'">
+                    <span class="material-icons">download</span> Créer une plainte
+                </button>
+                <button onclick="window.location.href='rapport-agent.html'">
+                    <span class="material-icons">local_police</span> Créer un Rapport d'agent
+                </button>
+            </div>
         </div>
     </section>
 
@@ -260,7 +291,9 @@
         <div class="section-content">
             <h2>Contactez-nous</h2>
             <p>Besoin d’aide ou de renseignements ? Notre équipe est à votre disposition pour répondre à vos questions.</p>
-            <a href="https://discord.gg/ZkBRNTHP" class="cta-button">Rejoignez-nous sur Discord</a>
+            <div class="section-content-button">
+                <a href="https://discord.gg/ZkBRNTHP" class="cta-button">Rejoignez-nous sur Discord</a>
+            </div>
         </div>
     </section>
 
