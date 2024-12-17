@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Material+Icons&display=swap"
         rel="stylesheet">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="picsou.png">
+    <link rel="icon" type="image/png" href="img/picsou.png">
 
     <style>
         /* Base Reset */
@@ -139,33 +139,10 @@
             }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav .container {
-                flex-direction: column;
-            }
-
-            nav .container>div:last-child {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .dropdown-content {
-                position: static;
-                display: none;
-                width: 100%;
-            }
-
-            .dropdown.active .dropdown-content {
-                display: block;
-            }
-        }
-
         /* Header Section */
         header {
             height: 100vh;
-            background: url('image1.png') center/cover no-repeat;
+            background: url('img/image1.png') center/cover no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -313,6 +290,87 @@
 
         footer p {
             font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            nav .container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            nav .container>div:last-child {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                width: 100%;
+            }
+
+            nav a,
+            .dropdown>a {
+                display: block;
+                text-align: center;
+                padding: 10px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                width: 100%;
+                box-shadow: none;
+                background-color: rgba(41, 128, 185, 0.1);
+            }
+
+            header {
+                height: auto;
+                padding: 100px 20px 50px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .button-container button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            section {
+                padding: 20px 10px;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            section p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Additional Mobile Optimization */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            .button-container button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>

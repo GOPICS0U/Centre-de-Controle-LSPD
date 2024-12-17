@@ -114,29 +114,6 @@ nav a:hover {
     }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    nav .container {
-        flex-direction: column;
-    }
-
-    nav .container>div:last-child {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .dropdown-content {
-        position: static;
-        display: none;
-        width: 100%;
-    }
-
-    .dropdown.active .dropdown-content {
-        display: block;
-    }
-}
-
 header {
     margin-top: 60px;
     background-color: #3c495f;
@@ -180,4 +157,67 @@ footer {
     margin-top: 30px;
     color: #7f8c8d;
     font-size: 0.9em;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    nav .container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    nav .container>div:last-child {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    nav a {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown-content {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    header {
+        margin-top: 80px;
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    section {
+        padding: 15px;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        margin-top: 100px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    li {
+        padding: 8px;
+    }
 }
