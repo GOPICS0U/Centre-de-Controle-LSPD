@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Règlement Interne du L.S.P.D</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Lien vers votre CSS -->
+</head>
+<style>
+    /* Modern, clean design with a professional law enforcement color scheme */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        line-height: 1.6;
+        background-color: #1d2b3a;
+        color: #f3f9ff;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Navigation Bar */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #2980b9;
+        color: #fff;
+        z-index: 1000;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #2980b9;
+        color: #fff;
+        z-index: 1000;
+    }
+
+    nav .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    nav .container>div:last-child {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+        position: relative;
+    }
+
+    nav a:hover {
+        color: #dce5ff;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown>a {
+        cursor: pointer;
+    }
+
+    .dropdown>a:after {
+        content: '❯';
+        font-size: 0.7em;
+        margin-left: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown.active>a:after {
+        transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        min-width: 200px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        border-radius: 0 0 5px 5px;
+        overflow: hidden;
+    }
+
+    .dropdown.active .dropdown-content {
+        display: block;
+        animation: dropdown-appear 0.3s ease-out;
+    }
+
+    .dropdown-content a {
+        color: #2c3e50;
+        padding: 12px 16px;
+        display: block;
+        text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+        color: #2980b9;
+    }
+
+    @keyframes dropdown-appear {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        nav .container {
+            flex-direction: column;
+        }
+
+        nav .container>div:last-child {
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dropdown-content {
+            position: static;
+            display: none;
+            width: 100%;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+    }
+
+
+    header {
+        background-color: #3c495f;
+        color: white;
+        text-align: center;
+        margin-top: 50px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    header h2 {
+        margin: 10px 0 0;
+        font-weight: 300;
+        color: #e0e0e0;
+    }
+
+    section {
+        background-color: #3c495f;
+        border-radius: 8px;
+        padding: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    h3 {
+        color: #2980b9;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+        margin-top: 30px;
+    }
+
+    p {
+        display: inline-block;
+        margin-right: 15px;
+        /* Espace entre les éléments */
+    }
+
+    li {
+        margin-top: 20px;
+    }
+
+    ul {
+        background-color: #2b3444;
+        border-left: 4px solid #3498db;
+        padding: 15px 15px 15px 30px;
+        border-radius: 4px;
+    }
+
+    strong {
+        color: #c0392b;
+    }
+
+    .mineure {
+        color: rgb(255, 217, 0);
+    }
+
+    .majeure {
+        color: orange;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 30px;
+        color: #7f8c8d;
+        font-size: 0.9em;
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+        body {
+            padding: 10px;
+        }
+
+        header {
+            padding: 15px;
+        }
+
+        section {
+            padding: 15px;
+        }
+    }
+
+    /* Subtle hover effects */
+    h3:hover {
+        color: #3498db;
+        transition: color 0.3s ease;
+    }
+
+    /* Print-friendly styles */
+    @media print {
+        body {
+            background-color: white;
+            color: black;
+        }
+
+        header {
+            background-color: transparent;
+            color: black;
+            border-bottom: 2px solid black;
+        }
+    }
+</style>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index.html">Accueil</a>
+                <a href="reglement.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle.html">Contrôle</a>
+                        <a href="arrestation.html">Arrestation</a>
+                        <a href="DM.html">Droits Miranda</a>
+                        <a href="I&MED.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2.html">DEFCON 2</a>
+                        <a href="DF3.html">DEFCON 3</a>
+                        <a href="DF5.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <a href="formations.html">Formations</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Règlement Interne du L.S.P.D</h1>
+        <h2>Règles Disciplinaires</h2>
+    </header>
+
+    <section>
+        <h3>F.M 1</h3>
+        <p>Un uniforme est spécialement conçu pour chaque unité, il devra être impérativement porté. Vous ne devez pas
+            avoir de tenues banalisées/personnalisées à part pour la D.O.A ATTENTION : en étant membre de la D.O.A vous
+            devez porter votre uniforme une fois à l’intérieur du commissariat ainsi porter un signe distinctif sur
+            votre tenue banalisée lors d’une Opération/Arrestation (Gilet/Badge).</p>
+        <p class="mineure">Faute mineure.</p>
+
+        <h3>F.M 2</h3>
+        <p>A chaque retour/départ de patrouille vous devez obligatoirement l'annoncer en radio.</p>
+        <p class="mineure">Faute mineure.</strong></p>
+
+        <h3>F.M 3</h3>
+        <p>Les messages radio de prise et de fin de service sont obligatoires.</p>
+        <p class="mineure">Faute mineure.</strong></p>
+
+        <h3>F.MA 1</h3>
+        <p>Il est strictement interdit de provoquer sur Twitter, de prononcer des « Cartel LSPD » etc.</p>
+        <p>Vous êtes LSPD et vous portez un uniforme, vous devez être cohérents et ne pas faire paraître un aspect
+            illégal même au niveau des tenues.</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 2</h3>
+        <p>Il est interdit d'être en possession d’un équipement qui ne vous est pas réservé. Si cela n’a pas été
+            autorisé par un supérieur habilité à prendre cette décision.</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 3</h3>
+        <p>Il est strictement interdit de déambuler librement en service lors de la présence d’un supérieur sauf si une
+            autorisation vous a été octroyée exclusivement énoncée par celui-ci.</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 4</h3>
+        <p>Il est strictement interdit de quitter les rangs lors d’une opération extérieure. En cas exclusif de perte du
+            bataillon, vous êtes dans l’obligation de contacter le plus rapidement possible votre supérieur par la radio
+            pour qu’il vienne à votre rencontre.</p>
+        <p class="majeure">Faute majeure (grave dans certains cas).</strong></p>
+
+        <h3>F.MA 5</h3>
+        <p>Il est strictement interdit de patrouiller en Lincoln.</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 6</h3>
+        <p>Il est strictement interdit de prendre la parole lors de la présence d’un supérieur. Une permission devra
+            être explicitée pour que votre supérieur vous accorde la permission de prendre la parole.</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 7</h3>
+        <p>Il est strictement interdit d’utiliser un véhicule d’une unité/grade dont vous n’en faites pas partie. (Sauf
+            en cas de dangers)</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 8</h3>
+        <ul>
+            <li>Lors d’une grosse opération préparée, nous devons entendre que les directives des leads OP qui ont été
+                mis en place avant l’opération.</li>
+            <li>Lors d’une grosse opération (fusillade, prise d’otage, etc) non préparée, nous devons entendre que les
+                directives des Officiers III minimum. (si disponible)</li>
+            <li>Lors d’une petite opération (courses poursuites, braquages, barrages, etc) nous devons entendre que les
+                Officiers II minimum.</li>
+        </ul>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 9</h3>
+        <p>Il est strictement interdit de posséder une arme si vous n’avez pas le grade requis.</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 10</h3>
+        <p>Si vous êtes un élément du S.W.A.T, il vous est strictement interdit de sortir une M4 ou un Fusil à Pompe si
+            vous n’avez pas le grade requis et si le S.W.A.T n’est pas déployé.</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 11</h3>
+        <p>Il vous est obligé de donner votre matricule devant tous citoyens.</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 12</h3>
+        <p>Il vous est obligé de garder votre sang froid devant tous les citoyens.</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.MA 12 (DOA)</h3>
+        <p>Sur une opération où une fusillade, vous n’avez pas le droit d’intervenir si vous êtes en DOA, vous devez
+            intervenir qu’en uniforme avec un véhicule de patrouille. En tant que DOA vous devez rester discret, à
+            l’écart et prendre des infos. Afin de rester discret, vous devez mettre vos gilets par balles en cas de
+            nécessité.</p>
+        <p class="majeure">Faute majeure.</strong></p>
+
+        <h3>F.G 1</h3>
+        <p>Le vol ou la dégradation du matériel ou des locaux est strictement interdit.</p>
+        <p><strong>Faute grave.</strong></p>
+
+        <h3>F.G 2</h3>
+        <p>Si vous êtes un élément du S.W.A.T, il vous est strictement interdit d’utiliser une M4 ou un Fusil à Pompe si
+            vous n’avez pas le grade requis et si le S.W.A.T n’est pas déployé.</p>
+        <p><strong>Faute grave.</strong></p>
+
+        <h3>F.G 3</h3>
+        <p>Il est strictement interdit d’utiliser une arme si vous n’avez pas le grade requis.</p>
+        <p><strong>Faute grave.</strong></p>
+
+        <h3>F.G 4</h3>
+        <p>Tirer sur un citoyen sans raisons valables (sans qu’il ait mis votre vie en danger) est strictement interdit,
+            nous devons au maximum éviter d’utiliser l’arme létale.</p>
+        <p><strong>Faute grave.</strong></p>
+
+        <h3>Sanctions</h3>
+        <h4>1er groupe: ( Fautes mineures )</h4>
+        <li>
+            <p>Sanction n°1 : Mise à pied 1J.</p>
+        </li>
+        <li>
+            <p>Sanction n°2 : Avertissement 1.</p>
+        </li>
+
+        <h4>2ème groupe: ( Fautes majeures )</h4>
+        <li>
+            <p>Sanction n°1 : Rétrogradation d'un grade.</p>
+        </li>
+        <li>
+            <p>Sanction n°2 : Mise à pied 3J.</p>
+        </li>
+        <li>
+            <p>Sanction n°3 : Avertissement 2.</p>
+        </li>
+        <li>
+            <p>Sanction n°4 : Pas de promotions pendant 1 voir 2 semaines.</p>
+        </li>
+
+        <h4>3ème groupe: ( Fautes graves )</h4>
+        <li>
+            <p>Sanction n°1 : Licenciement.</p>
+        </li>
+        <li>
+            <p>Sanction n°2 : Mise à pied temporaire à forte durée.</p>
+        </li>
+        <li>
+            <p>Sanction n°3 : Avertissement 3.</p>
+        </li>
+        <li>
+            <p>Sanction n°4 : Pas de promotions pendant 3 voir 4 semaines.</p>
+        </li>
+
+        <h3>Tableau des lois :</h3>
+
+        <h4>Articles d’attitude (1.0)</h4>
+        <ul>
+            <li>1.1 Le manque de respect entre agents est interdit.</li>
+            <p class="majeure">Faute majeure. <strong>(Faute grave dans certains cas).</strong></p>
+            <li>1.2 La désobéissance envers ses supérieurs est interdite.</li>
+            <p class="majeure">Faute majeure. <strong>(Faute grave dans certains cas).</strong></p>
+            <li>1.3 Le garde à vous est obligatoire envers ses supérieurs.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>1.4 Il est interdit d’appeler son supérieur par son prénom.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>1.5 Il est interdit d’avoir une absence mentale sans prévenir une pause de service dans la radio.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>1.6 La radio est à utilisation professionnelle.</li>
+            <p class="majeure">Faute majeure.</strong></p>
+            <li>1.9 Les relations ‘‘de couples’’ sont autorisées tant que ça n’affecte pas votre professionnalisme.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>1.10 Pas de relations ‘‘intimes’’ dans les lieux publics.</li>
+            <p class="majeure">Faute majeure.</strong></p>
+            <li>1.11 Ne pas prendre la parole quand un supérieur parle.</li>
+            <p class="mineure">Faute mineure.</p>
+            <p class="majeure">(Faute majeure dans certains cas).</p>
+            <li>1.12 Si vous vous faites tirer dessus par quelqu’un vous avez le droit de riposter même si la faim ne
+                justifie pas toujours les moyens, si une fusillade peut être évitée elle sera évitée.</li>
+            <li>1.13 Ne pas exécuter un ordre d’un supérieur est interdit.</li>
+            <p class="majeure">Faute majeure. <strong>(Faute grave dans certains cas).</strong></p>
+            <li>1.14 L’abus de pouvoir est sanctionnable.</li>
+            <p class="majeure">Faute majeure. <strong>(Faute grave dans certains cas).</strong></p>
+            <li>1.15 Lorsque vous n'êtes pas service vous avez interdiction d'être présent sur la radio D.</li>
+            <p class="mineure">Faute mineure.</p>
+        </ul>
+
+        <h4>Articles d’attitude diplomatique (2.0)</h4>
+        <ul>
+            <li>2.1 En aucun cas, je dois enfreindre les relations diplomatiques.</li>
+            <p class="majeure">Faute majeure. <strong>(Faute grave dans certains cas).</strong></p>
+            <li>2.5 Il est interdit de faire entrer toutes personnes ne possédant pas les accréditations nécessaires
+                dans un Commissariat, seul un Officier peut autoriser une telle chose.</li>
+            <p class="mineure">Faute mineure.</p>
+        </ul>
+
+        <h4>Articles de prise de service (3.0)</h4>
+        <ul>
+            <li>3.1 A chaque prise de service, votre équipement doit être vérifié, préparé et nettoyé (munitions,
+                nourritures…).</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>3.2 Dès votre prise de service, vous devez être à la disposition de vos supérieurs.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>3.3 Vous devez impérativement montrer votre respect devant le drapeau.</li>
+            <p class="mineure">Faute mineure.</p>
+        </ul>
+
+        <h4>Articles de Patrouille (4.0)</h4>
+        <ul>
+            <li>4.1 Vous êtes dans l’obligation de donner les informations dans une patrouille.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>4.2 Tout le monde doit être connecté à la radio vocale avant de partir en patrouille ou prendre son
+                service.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>4.3 A chaque début de patrouille vous devez impérativement l’annoncer à la radio commune.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>4.4 J’utilise la radio qu’en cas de nécessité et non pour raconter ma soirée de la veille.</li>
+            <p class="mineure">Faute mineure.</p>
+            <p class="majeure">(Faute majeure dans certains cas).</p>
+            <li>4.5 Si je cause des problèmes diplomatiques, j’en assume les conséquences.</li>
+            <p class="majeure">Faute majeure.</p>
+            <p><strong>(Faute grave dans certains cas).</strong></p>
+            <li>4.6 Lorsqu'un dispatch est effectué par vos supérieurs vous devez le respecter.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>4.7 Il est interdit de faire monter des civils dans votre véhicule lorsque vous êtes en service.</li>
+            <p class="majeure">Faute majeure.</strong></p>
+            <li>4.8 Seul l'État-Major est exempté de mettre/de poser une absence pour les période Courtes.</li>
+        </ul>
+
+        <h4>Articles de prise de pause de service (5.0)</h4>
+        <ul>
+            <li>5.1 Prendre une pause de service en pleine action est interdit (S’il n’y a pas d’autres solutions vous
+                pouvez.)</li>
+            <p class="mineure">Faute mineure.</p>
+            <p class="majeure">(Faute majeure dans certains cas).</p>
+            <li>5.2 En pause de service toutes les autres règles sont applicables.</li>
+            <p class="mineure">Faute Mineure</p>
+            <p class="majeure">Faute Majeur</p>
+            <p><strong>Faute Grave.</strong></p>
+        </ul>
+
+        <h4>Articles d’attitude (6.0)</h4>
+        <ul>
+            <li>6.1 Avant de prendre une fin de service, votre équipement doit être vérifié, préparé, nettoyé et déposé
+                dans les casiers.</li>
+            <p class="majeure">Faute majeure.</strong></p>
+            <li>6.2 Vous représentez les forces de l’ordre, vous devez donc avoir une conduite exemplaire en service
+                comme en civil.</li>
+            <p class="mineure">Faute Mineure</p>
+            <p class="majeure">Faute Majeur</p>
+            <p><strong>Faute Grave.</strong></p>
+        </ul>
+
+        <h4>Articles de Dispatch (7.0)</h4>
+        <ul>
+            <li>7.1 Chaque agent du LSPD se doit de voter aux présences Dispatch annoncé chaque jour par un agent.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>7.2 Si vous votez Présent, vous vous devez d’être présent à ce Dispatch.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>7.3 Si vous votez Absent, vous vous devez de postez une Absence Justifiée.</li>
+            <p class="mineure">Faute mineure.</p>
+            <li>7.4 Lors d’un Dispatch, vous vous devez de respecter le choix de votre coéquipier et du véhicule donné
+                par le Dispatcheur.</li>
+            <p class="mineure">Faute mineure.</p>
+        </ul>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

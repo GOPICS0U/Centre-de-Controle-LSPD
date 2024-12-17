@@ -14,7 +14,7 @@
     <!-- Navigation -->
     <nav>
         <div class="logo">LSPD - Alkia RP</div>
-        <img src="img/logo.png" alt= "logo-lspd" id="logo"/>
+        <img src="img/logo.png" alt="logo-lspd" id="logo" />
     </nav>
 
     <!-- Header -->
@@ -46,7 +46,9 @@
                     <input type="text" id="seizingAgent" name="seizingAgent" required>
                 </div>
 
-                <div id="InfoID" class="info-ID"><strong><p>/!\ (EX:<@0000000000000>) /!\</p></strong></div>
+                <div id="InfoID" class="info-ID"><strong>
+                        <p>/!\ (EX:<@0000000000000>) /!\</p>
+                    </strong></div>
 
                 <div class="form-group">
                     <label for="objectDate">Date de saisie :</label>
@@ -61,12 +63,16 @@
             <h2>Prévisualisation</h2>
             <div class="preview-container">
                 <div class="preview-item"><span>Date :</span> <span id="previewDate">Non renseigné</span></div>
-                <div class="preview-item"><span>Type d'objet :</span> <span id="previewObjectType">Non renseigné</span></div>
+                <div class="preview-item"><span>Type d'objet :</span> <span id="previewObjectType">Non renseigné</span>
+                </div>
                 <div class="preview-item"><span>Quantité :</span> <span id="previewAmount">Non renseigné</span></div>
-                <div class="preview-item"><span>Nom du suspect :</span> <span id="previewSuspect">Non renseigné</span></div>
+                <div class="preview-item"><span>Nom du suspect :</span> <span id="previewSuspect">Non renseigné</span>
+                </div>
                 <textarea class="preview-textarea" id="reportPreviewText" readonly></textarea>
 
-                <div id="InfoText" class="info-text"><strong><p>/!\ ajouter des photos directements sur Discord /!\</p></strong></div>
+                <div id="InfoText" class="info-text"><strong>
+                        <p>/!\ ajouter des photos directements sur Discord /!\</p>
+                    </strong></div>
 
                 <button class="btn-copy" onclick="copyText()">Copier le rapport</button>
             </div>
@@ -89,7 +95,7 @@
             document.getElementById('previewObjectType').textContent = objectType;
             document.getElementById('previewAmount').textContent = amount;
             document.getElementById('previewSuspect').textContent = suspectName;
-            
+
             document.getElementById('reportPreviewText').value = `
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 🗓️ Date : ${formattedDate}

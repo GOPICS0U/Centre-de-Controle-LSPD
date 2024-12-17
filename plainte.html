@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,12 @@
     <!-- Lien vers le fichier CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav>
         <div class="logo">LSPD - Alkia RP</div>
-        <img src="img/logo.png" alt= "logo-lspd" id="logo"/>
+        <img src="img/logo.png" alt="logo-lspd" id="logo" />
     </nav>
 
     <!-- Header -->
@@ -20,7 +22,7 @@
         <h1>Générer un Rapport de Saisie d'Objet</h1>
         <p>Remplissez le formulaire pour générer automatiquement un rapport de saisie d'objet.</p>
     </header>
-    
+
     <!-- Form and Preview Section -->
     <div class="form-container">
         <!-- Form Section -->
@@ -51,7 +53,9 @@
                     <input type="text" id="officerName" name="officerName" required>
                 </div>
 
-                <div id="InfoID" class="info-ID"><strong><p>/!\ (EX:<@0000000000000>) /!\</p></strong></div>
+                <div id="InfoID" class="info-ID"><strong>
+                        <p>/!\ (EX:<@0000000000000>) /!\</p>
+                    </strong></div>
 
                 <!-- Type d'incident -->
                 <div class="form-group">
@@ -197,14 +201,16 @@
             </div>
             <textarea class="preview-textarea" id="reportPreviewText" readonly></textarea>
 
-            <div id="InfoText" class="info-text"><strong><p>/!\ ajouter des photos directements sur Discord /!\</p></strong></div>
+            <div id="InfoText" class="info-text"><strong>
+                    <p>/!\ ajouter des photos directements sur Discord /!\</p>
+                </strong></div>
 
             <button class="btn-copy" onclick="copyText()">Copier le rapport</button>
         </div>
     </div>
 
     <script>
-        document.getElementById('policeReportForm').addEventListener('submit', function(event) {
+        document.getElementById('policeReportForm').addEventListener('submit', function (event) {
             event.preventDefault();
             generateReport();
         });
@@ -285,4 +291,5 @@ Signature de l’officier : <@${officerSignature}>
     </footer>
 
 </body>
+
 </html>

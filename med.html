@@ -14,7 +14,7 @@
     <!-- Navigation -->
     <nav>
         <div class="logo">LSPD - Alkia RP</div>
-        <img src="img/logo.png" alt= "logo-lspd" id="logo"/>
+        <img src="img/logo.png" alt="logo-lspd" id="logo" />
     </nav>
 
     <!-- Header -->
@@ -76,7 +76,9 @@
                     <input type="text" id="officerId" name="officerId">
                 </div>
 
-                <div id="InfoID" class="info-ID"><strong><p>/!\ (EX:<@0000000000000>) /!\</p></strong></div>
+                <div id="InfoID" class="info-ID"><strong>
+                        <p>/!\ (EX:<@0000000000000>) /!\</p>
+                    </strong></div>
 
                 <button type="submit">Générer le Rapport</button>
             </form>
@@ -121,14 +123,16 @@
 
             <textarea class="preview-textarea" id="reportPreviewText" readonly></textarea>
 
-            <div id="InfoText" class="info-text"><strong><p>/!\ ajouter des photos directements sur Discord /!\</p></strong></div>
+            <div id="InfoText" class="info-text"><strong>
+                    <p>/!\ ajouter des photos directements sur Discord /!\</p>
+                </strong></div>
 
             <button class="btn-copy" onclick="copyText()">Copier le rapport</button>
         </div>
     </div>
 
     <script>
-        document.getElementById('objectReportForm').addEventListener('submit', function(event) {
+        document.getElementById('objectReportForm').addEventListener('submit', function (event) {
             event.preventDefault();
             generateReport();
         });
