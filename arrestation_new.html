@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procédure d'Arrestation - LSPD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour la page de procédure d'arrestation */
+        .procedure-step {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--lspd-accent);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .procedure-step:hover {
+            background-color: rgba(26, 86, 167, 0.15);
+            transform: translateX(5px);
+        }
+
+        .procedure-step h3 {
+            color: var(--lspd-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .procedure-step h3::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--lspd-accent);
+            color: var(--lspd-dark-blue);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .procedure-step:nth-child(1) h3::before { content: '1'; }
+        .procedure-step:nth-child(2) h3::before { content: '2'; }
+        .procedure-step:nth-child(3) h3::before { content: '3'; }
+        .procedure-step:nth-child(4) h3::before { content: '4'; }
+        .procedure-step:nth-child(5) h3::before { content: '5'; }
+        .procedure-step:nth-child(6) h3::before { content: '6'; }
+        .procedure-step:nth-child(7) h3::before { content: '7'; }
+
+        .procedure-details {
+            padding-left: 20px;
+        }
+
+        .procedure-details p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .procedure-details ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .procedure-details li {
+            margin: 8px 0;
+            padding: 5px 10px;
+            background: rgba(10, 46, 92, 0.3);
+            border-left: 2px solid var(--lspd-blue);
+            border-radius: 4px;
+        }
+
+        .procedure-details li:hover {
+            background: rgba(10, 46, 92, 0.5);
+            transform: translateX(3px);
+        }
+
+        .warning-box {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .warning-box h4 {
+            color: #e74c3c;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-box h4::before {
+            content: '⚠️';
+            font-size: 1.2rem;
+        }
+
+        .tip-box {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .tip-box h4 {
+            color: #27ae60;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-box h4::before {
+            content: '💡';
+            font-size: 1.2rem;
+        }
+
+        .legal-box {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .legal-box h4 {
+            color: #3498db;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legal-box h4::before {
+            content: '⚖️';
+            font-size: 1.2rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--lspd-accent);
+            color: var(--lspd-dark-blue);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .procedure-step {
+                padding: 15px;
+            }
+            
+            .procedure-details {
+                padding-left: 10px;
+            }
+            
+            .procedure-details ul {
+                padding-left: 15px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new.html">Arrestation</a>
+                        <a href="DM_new.html">Droits Miranda</a>
+                        <a href="I&MED_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Formations</a>
+                    <div class="dropdown-content">
+                        <a href="formations_new.html">Toutes les formations</a>
+                        <a href="formation_swat.html">S.W.A.T.</a>
+                        <a href="formation_asd.html">A.S.D.</a>
+                        <a href="formation_mary.html">M.A.R.Y.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Procédure d'Arrestation</h1>
+        <p>Guide détaillé pour effectuer une arrestation conforme aux procédures du LSPD</p>
+    </header>
+
+    <main>
+        <section class="fade-up">
+            <h2>Procédure Standard d'Arrestation</h2>
+            
+            <div class="procedure-step">
+                <h3>Évaluation de la situation</h3>
+                <div class="procedure-details">
+                    <p>Avant de procéder à une arrestation, évaluez soigneusement la situation :</p>
+                    <ul>
+                        <li>Déterminez si vous avez des motifs raisonnables de croire qu'une infraction a été commise</li>
+                        <li>Évaluez le niveau de danger potentiel (présence d'armes, comportement agressif, etc.)</li>
+                        <li>Identifiez les témoins potentiels et sécurisez la scène si nécessaire</li>
+                        <li>Demandez des renforts si la situation présente des risques</li>
+                    </ul>
+                    
+                    <div class="legal-box">
+                        <h4>Base légale</h4>
+                        <p>Une arrestation légale nécessite :</p>
+                        <ul>
+                            <li>Un mandat d'arrêt valide, OU</li>
+                            <li>Des motifs raisonnables de croire qu'une personne a commis, est en train de commettre ou s'apprête à commettre une infraction</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Approche et contact initial</h3>
+                <div class="procedure-details">
+                    <p>L'approche initiale est cruciale pour la sécurité de tous :</p>
+                    <ul>
+                        <li>Identifiez-vous clairement comme agent de police</li>
+                        <li>Maintenez une distance de sécurité appropriée</li>
+                        <li>Gardez vos mains visibles mais prêtes à réagir</li>
+                        <li>Utilisez un ton ferme mais calme</li>
+                        <li>Informez clairement la personne qu'elle est en état d'arrestation</li>
+                        <li>Précisez le motif de l'arrestation</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4>Sécurité avant tout</h4>
+                        <p>Ne tournez jamais le dos à un suspect. Maintenez toujours une position tactique avantageuse et soyez attentif aux mouvements brusques ou aux tentatives de fuite.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Maîtrise et contrôle</h3>
+                <div class="procedure-details">
+                    <p>Procédez à la maîtrise physique du suspect :</p>
+                    <ul>
+                        <li>Donnez des instructions claires et simples ("Mettez vos mains derrière votre dos")</li>
+                        <li>Utilisez les techniques de contrôle appropriées selon le niveau de résistance</li>
+                        <li>Appliquez les menottes correctement (ni trop serrées, ni trop lâches)</li>
+                        <li>Vérifiez que les menottes sont bien verrouillées</li>
+                        <li>Aidez la personne menottée à se relever si nécessaire</li>
+                    </ul>
+                    
+                    <div class="tip-box">
+                        <h4>Technique de menottage</h4>
+                        <p>Placez les menottes avec les ouvertures vers le haut et les doubles barres vers l'extérieur. Vérifiez qu'elles ne sont pas trop serrées en pouvant passer un doigt entre les menottes et le poignet.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Fouille de sécurité</h3>
+                <div class="procedure-details">
+                    <p>Effectuez une fouille minutieuse pour votre sécurité :</p>
+                    <ul>
+                        <li>Informez le suspect que vous allez procéder à une fouille</li>
+                        <li>Commencez par les zones pouvant contenir des armes (ceinture, poches, chevilles)</li>
+                        <li>Procédez méthodiquement de haut en bas</li>
+                        <li>Saisissez tout objet dangereux ou illégal</li>
+                        <li>Documentez tous les objets saisis</li>
+                    </ul>
+                    
+                    <div class="legal-box">
+                        <h4>Fouille par agent de même sexe</h4>
+                        <p>Dans la mesure du possible, la fouille doit être effectuée par un agent du même sexe que la personne arrêtée. Si ce n'est pas possible immédiatement, une fouille sommaire de sécurité peut être effectuée, suivie d'une fouille complète par un agent du même sexe dès que possible.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Énoncé des droits Miranda</h3>
+                <div class="procedure-details">
+                    <p>Informez le suspect de ses droits :</p>
+                    <ul>
+                        <li>Récitez les droits Miranda de manière claire et complète</li>
+                        <li>Assurez-vous que le suspect comprend ses droits</li>
+                        <li>Demandez explicitement s'il comprend chacun de ses droits</li>
+                        <li>Demandez s'il souhaite parler malgré ces droits</li>
+                        <li>Documentez sa réponse</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4>Importance cruciale</h4>
+                        <p>L'omission de l'énoncé des droits Miranda peut rendre inutilisables les déclarations du suspect lors du procès. Consultez la page <a href="DM_new.html">Droits Miranda</a> pour le texte exact à utiliser.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Transport du suspect</h3>
+                <div class="procedure-details">
+                    <p>Transportez le suspect en toute sécurité :</p>
+                    <ul>
+                        <li>Effectuez une nouvelle vérification des menottes avant le transport</li>
+                        <li>Aidez le suspect à monter dans le véhicule de police</li>
+                        <li>Attachez sa ceinture de sécurité</li>
+                        <li>Informez le dispatch du début du transport et de votre destination</li>
+                        <li>Surveillez constamment le suspect pendant le transport</li>
+                        <li>Informez le dispatch de votre arrivée à destination</li>
+                    </ul>
+                    
+                    <div class="tip-box">
+                        <h4>Configuration du véhicule</h4>
+                        <p>Assurez-vous que les portes arrière ne peuvent pas être ouvertes de l'intérieur et que la séparation entre l'avant et l'arrière du véhicule est sécurisée.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Traitement au poste</h3>
+                <div class="procedure-details">
+                    <p>Procédez aux formalités administratives :</p>
+                    <ul>
+                        <li>Présentez le suspect à l'officier de garde</li>
+                        <li>Remplissez le registre d'écrou avec toutes les informations requises</li>
+                        <li>Effectuez la prise d'empreintes et de photographies</li>
+                        <li>Procédez à l'inventaire complet des effets personnels</li>
+                        <li>Remettez un reçu pour les objets confisqués</li>
+                        <li>Placez le suspect en cellule ou préparez-le pour l'interrogatoire</li>
+                    </ul>
+                    
+                    <div class="legal-box">
+                        <h4>Délais légaux</h4>
+                        <p>Le suspect doit être présenté à un juge dans les délais légaux prévus. Assurez-vous de documenter précisément les heures d'arrestation et de traitement.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Situations particulières</h2>
+            
+            <div class="warning-box">
+                <h4>Suspect résistant ou violent</h4>
+                <p>En cas de résistance :</p>
+                <ul>
+                    <li>Appelez immédiatement des renforts</li>
+                    <li>Utilisez uniquement la force nécessaire et proportionnée</li>
+                    <li>Documentez précisément le niveau de résistance et la force utilisée</li>
+                    <li>Faites examiner le suspect par un médecin après maîtrise</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <h4>Arrestation de mineurs</h4>
+                <p>Pour les suspects mineurs :</p>
+                <ul>
+                    <li>Contactez immédiatement les parents ou tuteurs légaux</li>
+                    <li>Utilisez des zones de détention séparées des adultes</li>
+                    <li>Un représentant légal doit être présent lors de l'interrogatoire</li>
+                    <li>Appliquez les procédures spécifiques aux mineurs</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <h4>Personnes vulnérables</h4>
+                <p>Pour les personnes présentant des troubles mentaux ou en état de détresse :</p>
+                <ul>
+                    <li>Faites preuve d'une patience et d'une attention particulières</li>
+                    <li>Évitez les stimuli excessifs (lumières vives, bruits forts)</li>
+                    <li>Demandez l'assistance d'un professionnel de santé si nécessaire</li>
+                    <li>Documentez tout comportement ou déclaration indiquant un trouble mental</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <a href="#" class="back-to-top" id="backToTop">
+        <span class="material-icons">arrow_upward</span>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement_new.html">Règlement</a></li>
+                    <li><a href="formations_new.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+    <script>
+        // Script pour le bouton "Retour en haut"
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            
+            // Afficher/masquer le bouton en fonction du défilement
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            // Défilement fluide vers le haut
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

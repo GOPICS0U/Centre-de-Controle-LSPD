@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formations LSPD - Alkia RP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour la page formations */
+        .formations-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .formation-card {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .formation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .formation-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .formation-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        }
+
+        .formation-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--lspd-accent);
+            color: var(--lspd-dark-blue);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+
+        .formation-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .formation-title {
+            color: var(--lspd-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .formation-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .formation-details {
+            margin-top: 15px;
+        }
+
+        .formation-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .formation-detail .material-icons {
+            font-size: 1.1rem;
+            margin-right: 8px;
+            color: var(--lspd-light-blue);
+        }
+
+        .formation-button {
+            display: inline-block;
+            background-color: var(--lspd-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            margin-top: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .formation-button:hover {
+            background-color: var(--lspd-dark-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Styles pour les filtres */
+        .formations-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .filter-button {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light-text);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .filter-button.active {
+            background-color: var(--lspd-accent);
+            color: var(--lspd-dark-blue);
+            border-color: var(--lspd-accent);
+        }
+
+        /* Styles pour les pages de formation spécifiques */
+        .formation-header {
+            background-color: rgba(26, 86, 167, 0.2);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formation-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--lspd-accent);
+        }
+
+        .formation-header h2 {
+            color: var(--lspd-accent);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .formation-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        .formation-section {
+            margin-bottom: 40px;
+        }
+
+        .formation-section h3 {
+            color: var(--lspd-light-blue);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .requirement-list, .module-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .requirement-list li, .module-list li {
+            margin: 10px 0;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--lspd-blue);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: all 0.3s ease;
+        }
+
+        .requirement-list li:hover, .module-list li:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+
+        .module-list li {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .module-number {
+            background-color: var(--lspd-blue);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .module-content {
+            flex-grow: 1;
+        }
+
+        .module-title {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--lspd-light-blue);
+        }
+
+        .instructor-section {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .instructor-title {
+            font-size: 1.2rem;
+            color: var(--lspd-light-blue);
+            margin-bottom: 15px;
+        }
+
+        .instructor-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .instructor-card {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            width: calc(33.333% - 14px);
+            min-width: 200px;
+        }
+
+        .instructor-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .instructor-rank {
+            font-size: 0.9rem;
+            color: var(--lspd-light-blue);
+        }
+
+        .back-to-formations {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--lspd-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-formations:hover {
+            background-color: var(--lspd-dark-blue);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .formations-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .instructor-card {
+                width: 100%;
+            }
+            
+            .formation-header {
+                padding: 20px;
+            }
+            
+            .formation-header h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new.html">Arrestation</a>
+                        <a href="DM_new.html">Droits Miranda</a>
+                        <a href="I&MED_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Formations</a>
+                    <div class="dropdown-content">
+                        <a href="formation_swat.html">S.W.A.T.</a>
+                        <a href="formation_asd.html">A.S.D.</a>
+                        <a href="formation_mary.html">M.A.R.Y.</a>
+                        <a href="formation_k9.html">K-9</a>
+                        <a href="formation_fto.html">F.T.O.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Formations LSPD</h1>
+        <p>Programmes de formation pour les unités spécialisées</p>
+    </header>
+
+    <main>
+        <section class="fade-up">
+            <h2>Nos programmes de formation</h2>
+            
+            <p>Le Los Santos Police Department propose diverses formations spécialisées pour permettre à ses agents de développer des compétences spécifiques et d'intégrer des unités d'élite. Chaque formation est conçue pour répondre aux exigences opérationnelles particulières de chaque unité.</p>
+            
+            <div class="formations-filters">
+                <button class="filter-button active" data-filter="all">Toutes les formations</button>
+                <button class="filter-button" data-filter="tactical">Tactiques</button>
+                <button class="filter-button" data-filter="investigation">Investigation</button>
+                <button class="filter-button" data-filter="support">Support</button>
+                <button class="filter-button" data-filter="specialized">Spécialisées</button>
+            </div>
+            
+            <div class="formations-container">
+                <!-- SWAT -->
+                <div class="formation-card" data-category="tactical">
+                    <div class="formation-image" style="background-image: url('https://i.imgur.com/JKyrUdS.jpg');">
+                        <div class="formation-badge">Tactique</div>
+                    </div>
+                    <div class="formation-content">
+                        <h3 class="formation-title">S.W.A.T.</h3>
+                        <p class="formation-description">Formation aux techniques d'intervention tactique pour les situations à haut risque, incluant la gestion des prises d'otages, le contre-terrorisme et les opérations spéciales.</p>
+                        <div class="formation-details">
+                            <div class="formation-detail">
+                                <span class="material-icons">schedule</span>
+                                <span>Durée: 4 jours</span>
+                            </div>
+                            <div class="formation-detail">
+                                <span class="material-icons">military_tech</span>
+                                <span>Niveau: Avancé</span>
+                            </div>
+                            <div class="formation-detail">
+                                <span class="material-icons">group</span>
+                                <span>Places: Limitées</span>
+                            </div>
+                        </div>
+                        <a href="formation_swat.html" class="formation-button">Voir le programme</a>
+                    </div>
+                </div>
+                
+                <!-- ASD -->
+                <div class="formation-card" data-category="specialized">
+                    <div class="formation-image" style="background-image: url('https://i.imgur.com/8XNrYLQ.jpg');">
+                        <div class="formation-badge">Spécialisée</div>
+                    </div>
+                    <div class="formation-content">
+                        <h3 class="formation-title">A.S.D. (Air Support Division)</h3>
+                        <p class="formation-description">Formation aux opérations aériennes, incluant le pilotage d'hélicoptères, la surveillance aérienne, les poursuites et le soutien tactique depuis les airs.</p>
+                        <div class="formation-details">
+                            <div class="formation-detail">
+                                <span class="material-icons">schedule</span>
+                                <span>Durée: 3 jours</span>
+                            </div>
+                            <div class="formation-detail">
+                                <span class="material-icons">military_tech</span>
+                                <span>Niveau: Intermédiaire</span>
+                            </div>
+                            <div class="formation-detail">
+                                <span class="material-icons">group</span>
+                                <span>Places: Très limitées</span>
+                            </div>
+                        </div>
+                        <a href="formation_asd.html" class="formation-button">Voir le programme</a>
+                    </div>
+                </div>
+                
+                <!-- MARY -->
+                <div class="formation-card" data-category="investigation">
+                    <div class="formation-image" style="background-image: url('https://i.imgur.com/pQnQ7tR.jpg');">
+                        <div class="formation-badge">Investigation</div>
+                    </div>
+                    <div class="formation-content">
+                        <h3 class="formation-title">M.A.R.Y. (Major Crimes Division)</h3>
+                        <p class="formation-description">Formation aux techniques d'enquête criminelle avancées pour résoudre les crimes majeurs, incluant les homicides, enlèvements et crimes organisés.</p>
+                        <div class="formation-details">
+                            <div class="formation-detail">
+                                <span class="material-icons">schedule</span>
+                                <span>Durée: 5 jours</span>
+                            </div>
+                            <div class="formation-detail">
+                                <span class="material-icons">military_tech</span>
+                                <span>Niveau: Expert</span>
+                            </div>
+                            <div class="formation-detail">
+                                <span class="material-icons">group</span>
+                                <span>Places: Sélection stricte</span>
+                            </div>
+                        </div>
+                        <a href="formation_mary.html" class="formation-button">Voir le programme</a>
+                    </div>
+                </div>
+                
+                <!-- K-9 -->
+                <div class="formation-card" data-category="specialized">
+                    <div class="formation-image" style="background-image: url('https://i.imgur.com/L2oAZDT.jpg');">
+                        <div class="formation-badge">Spécialisée</div>
+                    </div>
+                    <div class="formation-content">
+                        <h3 class="formation-title">Unité K-9</h3>
+                        <p class="formation-description">Formation au travail avec les chiens policiers pour la détection de drogues et explosifs, la recherche de personnes disparues et l'appréhension de suspects.</p>
+                        <div class="formation-details">
+                            <div class="formation-detail">
+                                <span class="material-icons">schedule</span>
+                                <span>Durée: 6 jours</span>
+                            </div>
+                            <div class="formation-detail">
+                                <span class="material-icons">military_tech</span>
+                                <span>Niveau: Intermédiaire</span>
+                            </div>
+                            <div class="formation-detail">
+                                <span class="material-icons">group</span>
+                                <span>Places: Limitées</span>
+                            </div>
+                        </div>
+                        <a href="formation_k9.html" class="formation-button">Voir le programme</a>
+                    </div>
+                </div>
+                
+                <!-- FTO -->
+                <div class="formation-card" data-category="support">
+                    <div class="formation-image" style="background-image: url('https://i.imgur.com/YqHAbfC.jpg');">
+                        <div class="formation-badge">Support</div>
+                    </div>
+                    <div class="formation-content">
+                        <h3 class="formation-title">F.T.O. (Field Training Officer)</h3>
+                        <p class="formation-description">Formation pour devenir instructeur de terrain, chargé de former et d'évaluer les nouvelles recrues pendant leur période probatoire.</p>
+                        <div class="formation-details">
+                            <div class="formation-detail">
+                                <span class="material-icons">schedule</span>
+                                <span>Durée: 2 jours</span>
+                            </div>
+                            <div class="formation-detail">
+                                <span class="material-icons">military_tech</span>
+                                <span>Niveau: Expérimenté</span>
+                            </div>
+                            <div class="formation-detail">
+                                <span class="material-icons">group</span>
+                                <span>Places: Selon besoins</span>
+                            </div>
+                        </div>
+                        <a href="formation_fto.html" class="formation-button">Voir le programme</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="fade-up">
+            <h2>Comment postuler</h2>
+            
+            <div class="protocol-section">
+                <h3>Procédure de candidature</h3>
+                <p>Pour postuler à l'une de nos formations spécialisées, veuillez suivre les étapes suivantes :</p>
+                <ol>
+                    <li>Assurez-vous de remplir les prérequis minimums pour la formation souhaitée</li>
+                    <li>Remplissez le formulaire de candidature disponible auprès de votre supérieur hiérarchique</li>
+                    <li>Joignez une lettre de motivation expliquant pourquoi vous souhaitez rejoindre cette unité</li>
+                    <li>Obtenez la recommandation d'un officier supérieur (Lieutenant ou plus)</li>
+                    <li>Soumettez votre dossier complet au bureau des formations</li>
+                </ol>
+                
+                <p>Les candidatures sont examinées mensuellement par un comité de sélection. Les candidats retenus seront convoqués pour des tests d'aptitude spécifiques à la formation demandée.</p>
+                
+                <div class="tip-box">
+                    <h4>Conseil</h4>
+                    <p>Avant de postuler, il est recommandé de discuter avec des membres actuels de l'unité visée pour mieux comprendre les exigences et responsabilités du poste.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement_new.html">Règlement</a></li>
+                    <li><a href="formations_new.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filtrage des formations
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const formationCards = document.querySelectorAll('.formation-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Retirer la classe active de tous les boutons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('active');
+                    
+                    // Récupérer la catégorie à filtrer
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filtrer les cartes
+                    formationCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

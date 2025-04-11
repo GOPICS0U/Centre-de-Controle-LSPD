@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEFCON 5 - LSPD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour la page DEFCON */
+        .defcon-header {
+            background-color: #2ecc71;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+            border: 2px solid #27ae60;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+
+        .defcon-level {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .defcon-description {
+            font-size: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        .protocol-section {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--lspd-accent);
+            transition: all 0.3s ease;
+        }
+
+        .protocol-section:hover {
+            background-color: rgba(26, 86, 167, 0.15);
+            transform: translateX(5px);
+        }
+
+        .protocol-section h3 {
+            color: var(--lspd-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+
+        .authorization-list, .restriction-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .authorization-list li {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid #27ae60;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .authorization-list li::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .restriction-list li {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .restriction-list li::before {
+            content: "✕";
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .info-box {
+            background-color: rgba(52, 152, 219, 0.1);
+            border: 2px solid #3498db;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            color: #3498db;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .defcon-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .defcon-navigation a {
+            background-color: var(--lspd-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .defcon-navigation a:hover {
+            background-color: var(--lspd-dark-blue);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .defcon-level {
+                font-size: 2rem;
+            }
+            
+            .defcon-description {
+                font-size: 1rem;
+            }
+            
+            .protocol-section {
+                padding: 15px;
+            }
+            
+            .defcon-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .defcon-navigation a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new.html">Arrestation</a>
+                        <a href="DM_new.html">Droits Miranda</a>
+                        <a href="I&MED_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <a href="formations.html">Formations</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Protocole DEFCON 5</h1>
+        <p>Niveau d'alerte normal - Opérations standard</p>
+    </header>
+
+    <main>
+        <div class="defcon-header">
+            <div class="defcon-level">DEFCON 5</div>
+            <p class="defcon-description">NIVEAU NORMAL - OPÉRATIONS STANDARD</p>
+        </div>
+
+        <section class="fade-up">
+            <h2>Description du niveau d'alerte</h2>
+            
+            <div class="protocol-section">
+                <h3>Définition du DEFCON 5</h3>
+                <p>Le DEFCON 5 représente le niveau d'alerte normal du Los Santos Police Department. C'est le niveau opérationnel standard en l'absence de menaces particulières ou de situations d'urgence. Il correspond aux conditions suivantes :</p>
+                <ul>
+                    <li>Activité criminelle dans les limites habituelles</li>
+                    <li>Aucune menace spécifique identifiée</li>
+                    <li>Fonctionnement normal des services de police</li>
+                    <li>Patrouilles et interventions de routine</li>
+                </ul>
+                
+                <div class="info-box">
+                    <h4>INFORMATION</h4>
+                    <p>Le DEFCON 5 est le niveau par défaut. Aucune autorisation spéciale n'est requise pour opérer à ce niveau.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Protocoles opérationnels</h2>
+            
+            <div class="protocol-section">
+                <h3>Autorisations standard</h3>
+                <p>En DEFCON 5, les agents du LSPD opèrent selon les procédures standard :</p>
+                <ul class="authorization-list">
+                    <li>Port de l'équipement standard (uniforme, arme de service, radio)</li>
+                    <li>Patrouilles régulières dans les secteurs assignés</li>
+                    <li>Contrôles routiers selon les besoins</li>
+                    <li>Réponse aux appels d'urgence et plaintes des citoyens</li>
+                    <li>Application normale du code de la route et des lois</li>
+                    <li>Coordination habituelle avec les autres services (pompiers, ambulances)</li>
+                </ul>
+            </div>
+            
+            <div class="protocol-section">
+                <h3>Restrictions et obligations</h3>
+                <p>Même en situation normale, certaines règles doivent être respectées :</p>
+                <ul class="restriction-list">
+                    <li>L'usage de la force doit être strictement proportionné et justifié</li>
+                    <li>Les droits des citoyens doivent être pleinement respectés</li>
+                    <li>Les procédures d'arrestation standard doivent être suivies à la lettre</li>
+                    <li>L'utilisation d'armes à feu est soumise à des règles strictes</li>
+                    <li>Toute intervention doit être documentée selon les procédures</li>
+                    <li>La chaîne de commandement doit être respectée</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Organisation et déploiement</h2>
+            
+            <div class="protocol-section">
+                <h3>Structure de commandement</h3>
+                <p>En DEFCON 5, la structure de commandement standard s'applique :</p>
+                <ul>
+                    <li>Répartition normale des effectifs selon le planning établi</li>
+                    <li>Supervision par les sergents et lieutenants de service</li>
+                    <li>Briefings au début de chaque quart de travail</li>
+                    <li>Coordination entre les différentes unités selon les besoins</li>
+                    <li>Rapports de fin de service selon les procédures habituelles</li>
+                </ul>
+            </div>
+            
+            <div class="protocol-section">
+                <h3>Équipement standard</h3>
+                <p>Les agents en service doivent être équipés de :</p>
+                <ul>
+                    <li>Uniforme réglementaire complet</li>
+                    <li>Arme de service et munitions standard</li>
+                    <li>Radio de service</li>
+                    <li>Équipement de contrainte (menottes)</li>
+                    <li>Carnet de contraventions</li>
+                    <li>Gilet pare-balles (selon les directives du service)</li>
+                </ul>
+                
+                <div class="info-box">
+                    <h4>Note sur l'équipement</h4>
+                    <p>L'utilisation d'équipements spéciaux (fusils, équipement tactique) nécessite une autorisation spécifique d'un supérieur, même en DEFCON 5.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Procédures de communication</h2>
+            
+            <div class="protocol-section">
+                <h3>Codes et protocoles</h3>
+                <p>En DEFCON 5, les communications suivent les protocoles standard :</p>
+                <ul>
+                    <li>Utilisation des codes radio habituels</li>
+                    <li>Communications claires et concises</li>
+                    <li>Rapports réguliers de position et d'activité</li>
+                    <li>Utilisation des canaux radio assignés</li>
+                    <li>Respect des procédures d'appel et de réponse</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Procédure d'escalade</h2>
+            
+            <div class="protocol-section">
+                <h3>Passage au DEFCON 3</h3>
+                <p>L'escalade du DEFCON 5 vers le DEFCON 3 peut être décidée par un Lieutenant ou un officier de rang supérieur lorsque les circonstances l'exigent. Les critères d'escalade incluent :</p>
+                <ul>
+                    <li>Incident armé en cours</li>
+                    <li>Menace identifiée nécessitant une réponse coordonnée</li>
+                    <li>Situation de prise d'otages</li>
+                    <li>Troubles civils significatifs</li>
+                    <li>Catastrophe naturelle ou accident majeur</li>
+                </ul>
+                
+                <p>Procédure d'escalade :</p>
+                <ol>
+                    <li>Évaluation de la situation par l'officier responsable</li>
+                    <li>Consultation avec la hiérarchie si possible</li>
+                    <li>Annonce officielle du passage au DEFCON 3</li>
+                    <li>Activation des protocoles DEFCON 3</li>
+                    <li>Notification à tous les agents en service</li>
+                    <li>Rappel des agents supplémentaires si nécessaire</li>
+                </ol>
+            </div>
+        </section>
+
+        <div class="defcon-navigation">
+            <a href="DF3_new.html">
+                <span class="material-icons">arrow_back</span> DEFCON 3
+            </a>
+            <a href="DF2_new.html">
+                DEFCON 2 <span class="material-icons">arrow_forward</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement_new.html">Règlement</a></li>
+                    <li><a href="formations_new.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+
+</html>

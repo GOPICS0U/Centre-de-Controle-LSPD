@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEFCON 2 - LSPD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour la page DEFCON */
+        .defcon-header {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+            border: 2px solid #c0392b;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        .defcon-level {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .defcon-description {
+            font-size: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        .protocol-section {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--lspd-accent);
+            transition: all 0.3s ease;
+        }
+
+        .protocol-section:hover {
+            background-color: rgba(26, 86, 167, 0.15);
+            transform: translateX(5px);
+        }
+
+        .protocol-section h3 {
+            color: var(--lspd-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+
+        .authorization-list, .restriction-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .authorization-list li {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid #27ae60;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .authorization-list li::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .restriction-list li {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .restriction-list li::before {
+            content: "✕";
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .alert-box {
+            background-color: rgba(231, 76, 60, 0.1);
+            border: 2px solid #e74c3c;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .alert-box h4 {
+            color: #e74c3c;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .alert-box p {
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        .defcon-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .defcon-navigation a {
+            background-color: var(--lspd-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .defcon-navigation a:hover {
+            background-color: var(--lspd-dark-blue);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .defcon-level {
+                font-size: 2rem;
+            }
+            
+            .defcon-description {
+                font-size: 1rem;
+            }
+            
+            .protocol-section {
+                padding: 15px;
+            }
+            
+            .defcon-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .defcon-navigation a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new_new.html">Arrestation</a>
+                        <a href="DM_new_new.html">Droits Miranda</a>
+                        <a href="I&MED_new_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Formations</a>
+                    <div class="dropdown-content">
+                        <a href="formations_new.html">Toutes les formations</a>
+                        <a href="formation_swat.html">S.W.A.T.</a>
+                        <a href="formation_asd.html">A.S.D.</a>
+                        <a href="formation_mary.html">M.A.R.Y.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Protocole DEFCON 2</h1>
+        <p>Niveau d'alerte maximale - Menace imminente</p>
+    </header>
+
+    <main>
+        <div class="defcon-header">
+            <div class="defcon-level">DEFCON 2</div>
+            <p class="defcon-description">ALERTE MAXIMALE - MENACE IMMINENTE</p>
+        </div>
+
+        <section class="fade-up">
+            <h2>Description du niveau d'alerte</h2>
+            
+            <div class="protocol-section">
+                <h3>Définition du DEFCON 2</h3>
+                <p>Le DEFCON 2 représente le niveau d'alerte le plus élevé du Los Santos Police Department. Il est déclenché uniquement lors de situations extrêmement graves présentant une menace imminente pour la sécurité publique, telles que :</p>
+                <ul>
+                    <li>Attaque terroriste en cours ou imminente</li>
+                    <li>Prise d'otages massive</li>
+                    <li>Émeute généralisée</li>
+                    <li>Catastrophe majeure nécessitant une mobilisation totale</li>
+                    <li>Menace armée de grande ampleur</li>
+                </ul>
+                
+                <div class="alert-box">
+                    <h4>ATTENTION</h4>
+                    <p>Le DEFCON 2 ne peut être déclenché que par le Chef de la Police ou son adjoint direct. En leur absence, seul un Capitaine peut prendre cette décision.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Protocoles opérationnels</h2>
+            
+            <div class="protocol-section">
+                <h3>Autorisations spéciales</h3>
+                <p>Pendant le DEFCON 2, les agents du LSPD sont autorisés à :</p>
+                <ul class="authorization-list">
+                    <li>Utiliser tous les moyens nécessaires pour neutraliser la menace, y compris l'usage d'armes létales si la situation l'exige</li>
+                    <li>Procéder à des contrôles d'identité systématiques dans les zones sensibles</li>
+                    <li>Établir des barrages routiers et des points de contrôle sans autorisation préalable</li>
+                    <li>Réquisitionner des véhicules civils en cas de nécessité absolue</li>
+                    <li>Ordonner l'évacuation immédiate de zones jugées dangereuses</li>
+                    <li>Accéder à l'armement lourd et aux équipements tactiques spéciaux</li>
+                    <li>Coordonner les opérations avec les forces militaires si nécessaire</li>
+                </ul>
+            </div>
+            
+            <div class="protocol-section">
+                <h3>Restrictions et obligations</h3>
+                <p>Malgré l'état d'urgence, certaines restrictions demeurent en vigueur :</p>
+                <ul class="restriction-list">
+                    <li>L'usage de la force létale doit rester proportionné à la menace</li>
+                    <li>Les droits fondamentaux des citoyens doivent être respectés dans la mesure du possible</li>
+                    <li>Toute action doit être documentée et justifiée ultérieurement</li>
+                    <li>La chaîne de commandement doit être strictement respectée</li>
+                    <li>Les communications doivent rester cryptées et sécurisées</li>
+                    <li>Aucun agent ne peut quitter son poste sans autorisation explicite</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Organisation et déploiement</h2>
+            
+            <div class="protocol-section">
+                <h3>Structure de commandement</h3>
+                <p>En DEFCON 2, la structure de commandement est renforcée :</p>
+                <ul>
+                    <li>Un poste de commandement central (PCC) est établi au quartier général du LSPD</li>
+                    <li>Tous les officiers supérieurs (Lieutenant et au-dessus) doivent se présenter immédiatement au PCC</li>
+                    <li>Des équipes tactiques sont déployées selon un plan préétabli</li>
+                    <li>Chaque zone de la ville est placée sous la responsabilité d'un officier désigné</li>
+                    <li>Des briefings sont organisés toutes les heures pour mettre à jour la situation</li>
+                </ul>
+            </div>
+            
+            <div class="protocol-section">
+                <h3>Équipement et armement</h3>
+                <p>Tous les agents en service doivent être équipés de :</p>
+                <ul>
+                    <li>Gilet pare-balles renforcé (niveau III minimum)</li>
+                    <li>Arme de service principale et arme de secours</li>
+                    <li>Radio avec canal d'urgence dédié</li>
+                    <li>Kit de premiers secours tactique</li>
+                    <li>Équipement anti-émeute pour les unités désignées</li>
+                    <li>Masque à gaz et équipement NRBC si nécessaire</li>
+                </ul>
+                
+                <p>Les unités spéciales ont accès à :</p>
+                <ul>
+                    <li>Fusils d'assaut et fusils de précision</li>
+                    <li>Équipement de vision nocturne</li>
+                    <li>Véhicules blindés</li>
+                    <li>Drones de surveillance</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Procédures de communication</h2>
+            
+            <div class="protocol-section">
+                <h3>Codes et protocoles</h3>
+                <p>En DEFCON 2, des protocoles de communication spécifiques sont activés :</p>
+                <ul>
+                    <li>Utilisation exclusive des codes radio d'urgence</li>
+                    <li>Confirmation systématique des ordres reçus</li>
+                    <li>Rapports de situation toutes les 30 minutes</li>
+                    <li>Communication cryptée uniquement</li>
+                    <li>Utilisation de canaux dédiés pour chaque équipe d'intervention</li>
+                </ul>
+                
+                <div class="alert-box">
+                    <h4>IMPORTANT</h4>
+                    <p>Toute communication avec les médias doit être validée par le PCC. Aucune information sensible ne doit être divulguée.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Procédure de désescalade</h2>
+            
+            <div class="protocol-section">
+                <h3>Retour au DEFCON 3</h3>
+                <p>La désescalade du DEFCON 2 vers le DEFCON 3 ne peut être ordonnée que par l'autorité ayant déclenché l'alerte, après évaluation complète de la situation et confirmation que la menace immédiate a été neutralisée ou significativement réduite.</p>
+                
+                <p>Procédure de désescalade :</p>
+                <ol>
+                    <li>Évaluation complète de la situation par le commandement</li>
+                    <li>Confirmation de la neutralisation ou réduction significative de la menace</li>
+                    <li>Annonce officielle de la désescalade sur tous les canaux de communication</li>
+                    <li>Réorganisation progressive des équipes selon le protocole DEFCON 3</li>
+                    <li>Débriefing complet et rapport détaillé de l'incident</li>
+                </ol>
+            </div>
+        </section>
+
+        <div class="defcon-navigation">
+            <a href="DF3_new.html">
+                <span class="material-icons">arrow_back</span> DEFCON 3
+            </a>
+            <a href="DF5_new.html">
+                DEFCON 5 <span class="material-icons">arrow_forward</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement_new.html">Règlement</a></li>
+                    <li><a href="formations_new.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+
+</html>

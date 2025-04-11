@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Droits Miranda - LSPD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour la page des Droits Miranda */
+        .miranda-card {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .miranda-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--lspd-accent);
+        }
+
+        .miranda-card h3 {
+            color: var(--lspd-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .miranda-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #e6e6e6;
+        }
+
+        .miranda-text p {
+            margin-bottom: 15px;
+        }
+
+        .miranda-explanation {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+        }
+
+        .miranda-explanation h4 {
+            color: var(--lspd-light-blue);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .miranda-explanation p {
+            margin-bottom: 10px;
+        }
+
+        .miranda-explanation ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+
+        .miranda-explanation li {
+            margin: 8px 0;
+            padding: 0;
+            background: none;
+            border-left: none;
+        }
+
+        .miranda-explanation li:hover {
+            transform: none;
+            background: none;
+        }
+
+        .important-note {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .important-note h4 {
+            color: #e74c3c;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .copy-button {
+            background-color: var(--lspd-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background-color: var(--lspd-dark-blue);
+            transform: translateY(-3px);
+        }
+
+        .copy-button:active {
+            transform: translateY(1px);
+        }
+
+        .miranda-card.english {
+            border-left: 4px solid #3498db;
+        }
+
+        .miranda-card.english::before {
+            background-color: #3498db;
+        }
+
+        .miranda-card.english h3 {
+            color: #3498db;
+        }
+
+        @media (max-width: 768px) {
+            .miranda-card {
+                padding: 20px;
+            }
+            
+            .miranda-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new_new.html">Arrestation</a>
+                        <a href="DM_new.html">Droits Miranda</a>
+                        <a href="I&MED_new_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Formations</a>
+                    <div class="dropdown-content">
+                        <a href="formations_new.html">Toutes les formations</a>
+                        <a href="formation_swat.html">S.W.A.T.</a>
+                        <a href="formation_asd.html">A.S.D.</a>
+                        <a href="formation_mary.html">M.A.R.Y.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Droits Miranda</h1>
+        <p>Procédure obligatoire lors de toute arrestation</p>
+    </header>
+
+    <main>
+        <section class="fade-up">
+            <h2>Les Droits Miranda</h2>
+            
+            <p>Les Droits Miranda constituent un élément fondamental de la procédure d'arrestation. Ils doivent être énoncés à toute personne arrêtée avant tout interrogatoire, afin de l'informer de ses droits constitutionnels.</p>
+            
+            <div class="important-note">
+                <h4>ATTENTION</h4>
+                <p>Le non-respect de cette procédure peut entraîner l'invalidation des déclarations du suspect lors du procès et compromettre l'ensemble de la procédure judiciaire.</p>
+            </div>
+            
+            <div class="miranda-card">
+                <h3>Version Française</h3>
+                <div class="miranda-text" id="miranda-fr">
+                    <p>Vous avez le droit de garder le silence. Si vous renoncez à ce droit, tout ce que vous direz pourra être et sera utilisé contre vous devant une cour de justice.</p>
+                    <p>Vous avez le droit de consulter un avocat et de l'avoir présent avec vous pendant l'interrogatoire. Si vous n'en avez pas les moyens, un avocat vous sera désigné d'office pour vous représenter, sans frais à votre charge.</p>
+                    <p>Pendant l'interrogatoire, vous pouvez décider à n'importe quel moment d'exercer ces droits, de ne répondre à aucune question ou de ne faire aucune déposition.</p>
+                    <p>Comprenez-vous chacun de ces droits que je viens de vous expliquer ?</p>
+                    <p>En gardant ces droits à l'esprit, souhaitez-vous me parler ?</p>
+                </div>
+                <button class="copy-button" onclick="copyToClipboard('miranda-fr')">
+                    <span class="material-icons">content_copy</span> Copier le texte
+                </button>
+                
+                <div class="miranda-explanation">
+                    <h4>Explication</h4>
+                    <p>Cette formulation officielle des Droits Miranda informe le suspect de :</p>
+                    <ul>
+                        <li>Son droit de garder le silence</li>
+                        <li>Le fait que ses déclarations pourront être utilisées contre lui</li>
+                        <li>Son droit à un avocat</li>
+                        <li>La possibilité d'avoir un avocat commis d'office</li>
+                        <li>Son droit d'interrompre l'interrogatoire à tout moment</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="miranda-card english">
+                <h3>Version Anglaise (English Version)</h3>
+                <div class="miranda-text" id="miranda-en">
+                    <p>You have the right to remain silent. Anything you say can and will be used against you in a court of law.</p>
+                    <p>You have the right to an attorney and to have them present during questioning. If you cannot afford an attorney, one will be appointed to represent you at no cost.</p>
+                    <p>During the interrogation, you can decide at any time to exercise these rights, not answer any questions, or make any statements.</p>
+                    <p>Do you understand each of these rights as I have explained them to you?</p>
+                    <p>With these rights in mind, do you wish to speak to me?</p>
+                </div>
+                <button class="copy-button" onclick="copyToClipboard('miranda-en')">
+                    <span class="material-icons">content_copy</span> Copy text
+                </button>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Application des Droits Miranda</h2>
+            
+            <div class="protocol-section">
+                <h3>Quand énoncer les Droits Miranda</h3>
+                <p>Les Droits Miranda doivent être énoncés dans les situations suivantes :</p>
+                <ul>
+                    <li>Lors de toute arrestation, avant de poser des questions relatives à l'infraction</li>
+                    <li>Lorsqu'une personne est placée en garde à vue</li>
+                    <li>Avant tout interrogatoire d'un suspect en détention</li>
+                    <li>Lorsqu'une personne initialement témoin devient suspecte durant un interrogatoire</li>
+                </ul>
+                
+                <p>Il n'est pas nécessaire d'énoncer les Droits Miranda dans les cas suivants :</p>
+                <ul>
+                    <li>Lors d'un simple contrôle routier</li>
+                    <li>Lors de questions préliminaires pour établir l'identité</li>
+                    <li>Lors de conversations spontanées non sollicitées par les agents</li>
+                </ul>
+            </div>
+            
+            <div class="protocol-section">
+                <h3>Procédure correcte</h3>
+                <p>Pour que les Droits Miranda soient considérés comme correctement énoncés :</p>
+                <ol>
+                    <li>Ils doivent être lus clairement et dans une langue que le suspect comprend</li>
+                    <li>L'agent doit s'assurer que le suspect comprend ses droits en lui demandant explicitement</li>
+                    <li>Le suspect doit confirmer qu'il comprend ses droits</li>
+                    <li>L'agent doit demander au suspect s'il souhaite parler malgré ces droits</li>
+                    <li>La réponse du suspect doit être documentée</li>
+                </ol>
+                
+                <div class="important-note">
+                    <h4>Renonciation aux droits</h4>
+                    <p>Si le suspect renonce à ses droits et accepte de parler, cette renonciation doit être :</p>
+                    <ul>
+                        <li>Volontaire - sans contrainte ni coercition</li>
+                        <li>Consciente - le suspect doit comprendre ce à quoi il renonce</li>
+                        <li>Explicite - une simple absence de demande d'avocat n'est pas suffisante</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement_new.html">Règlement</a></li>
+                    <li><a href="formations_new.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+
+</html>

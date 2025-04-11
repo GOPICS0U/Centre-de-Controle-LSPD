@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation A.S.D. - LSPD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour la page formation ASD */
+        .formation-header {
+            background-color: rgba(26, 86, 167, 0.2);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formation-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--lspd-accent);
+        }
+
+        .formation-header h2 {
+            color: var(--lspd-accent);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .formation-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        .formation-section {
+            margin-bottom: 40px;
+        }
+
+        .formation-section h3 {
+            color: var(--lspd-light-blue);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .requirement-list, .module-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .requirement-list li, .module-list li {
+            margin: 10px 0;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--lspd-blue);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: all 0.3s ease;
+        }
+
+        .requirement-list li:hover, .module-list li:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+
+        .module-list li {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .module-number {
+            background-color: var(--lspd-blue);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .module-content {
+            flex-grow: 1;
+        }
+
+        .module-title {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--lspd-light-blue);
+        }
+
+        .instructor-section {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .instructor-title {
+            font-size: 1.2rem;
+            color: var(--lspd-light-blue);
+            margin-bottom: 15px;
+        }
+
+        .instructor-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .instructor-card {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            width: calc(33.333% - 14px);
+            min-width: 200px;
+        }
+
+        .instructor-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .instructor-rank {
+            font-size: 0.9rem;
+            color: var(--lspd-light-blue);
+        }
+
+        .back-to-formations {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--lspd-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-formations:hover {
+            background-color: var(--lspd-dark-blue);
+            transform: translateY(-3px);
+        }
+
+        .warning-box {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .warning-box h4 {
+            color: #e74c3c;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-box h4::before {
+            content: '⚠️';
+            font-size: 1.2rem;
+        }
+
+        .tip-box {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .tip-box h4 {
+            color: #27ae60;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-box h4::before {
+            content: '💡';
+            font-size: 1.2rem;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .equipment-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .equipment-item:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .equipment-name {
+            font-weight: 500;
+            color: var(--lspd-light-blue);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .equipment-name .material-icons {
+            font-size: 1.2rem;
+        }
+
+        .aircraft-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .aircraft-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            width: calc(50% - 10px);
+            min-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .aircraft-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .aircraft-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .aircraft-content {
+            padding: 15px;
+        }
+
+        .aircraft-name {
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: var(--lspd-light-blue);
+            margin-bottom: 8px;
+        }
+
+        .aircraft-specs {
+            margin-top: 10px;
+        }
+
+        .aircraft-spec {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .aircraft-spec .material-icons {
+            font-size: 1rem;
+            color: var(--lspd-accent);
+        }
+
+        @media (max-width: 768px) {
+            .formation-header {
+                padding: 20px;
+            }
+            
+            .formation-header h2 {
+                font-size: 1.7rem;
+            }
+            
+            .instructor-card {
+                width: 100%;
+            }
+            
+            .equipment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .aircraft-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new.html">Arrestation</a>
+                        <a href="DM_new.html">Droits Miranda</a>
+                        <a href="I&MED_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Formations</a>
+                    <div class="dropdown-content">
+                        <a href="formation_swat.html">S.W.A.T.</a>
+                        <a href="formation_asd.html">A.S.D.</a>
+                        <a href="formation_mary.html">M.A.R.Y.</a>
+                        <a href="formation_k9.html">K-9</a>
+                        <a href="formation_fto.html">F.T.O.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Formation A.S.D.</h1>
+        <p>Air Support Division</p>
+    </header>
+
+    <main>
+        <section class="fade-up">
+            <div class="formation-header">
+                <h2>Programme de formation A.S.D.</h2>
+                <p>L'Air Support Division (A.S.D.) est une unité spécialisée du LSPD qui fournit un soutien aérien aux opérations policières. Cette formation de 3 semaines prépare les agents aux opérations aériennes, incluant le pilotage d'hélicoptères, la surveillance aérienne, les poursuites et le soutien tactique depuis les airs.</p>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Conditions d'admission</h3>
+                <ul class="requirement-list">
+                    <li>Être officier de police assermenté depuis au moins 18 mois</li>
+                    <li>Avoir un dossier disciplinaire exemplaire</li>
+                    <li>Passer avec succès l'examen médical spécifique à l'aviation</li>
+                    <li>Réussir les tests d'aptitude spatiale et de coordination</li>
+                    <li>Obtenir l'autorisation du chef de service</li>
+                    <li>Ne pas avoir de problèmes de vision ou d'équilibre</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <h4>Examen médical</h4>
+                    <p>L'examen médical comprend des tests spécifiques pour :</p>
+                    <ul>
+                        <li>Vision (acuité, perception des couleurs, vision nocturne)</li>
+                        <li>Équilibre et système vestibulaire</li>
+                        <li>Fonction cardiaque sous stress</li>
+                        <li>Réflexes et temps de réaction</li>
+                        <li>Résistance au mal des airs</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Programme de formation</h3>
+                <p>La formation A.S.D. est structurée en modules progressifs :</p>
+                
+                <ul class="module-list">
+                    <li>
+                        <div class="module-number">1</div>
+                        <div class="module-content">
+                            <div class="module-title">Principes fondamentaux de l'aéronautique</div>
+                            <p>Théorie du vol, aérodynamique, météorologie, réglementation aérienne, espace aérien de Los Santos.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">2</div>
+                        <div class="module-content">
+                            <div class="module-title">Pilotage d'hélicoptère - Base</div>
+                            <p>Commandes de vol, décollage, vol stationnaire, manœuvres de base, atterrissage, gestion des urgences simples.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">3</div>
+                        <div class="module-content">
+                            <div class="module-title">Pilotage d'hélicoptère - Avancé</div>
+                            <p>Vol en conditions difficiles, vol de nuit, vol en montagne, atterrissages d'urgence, manœuvres tactiques.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">4</div>
+                        <div class="module-content">
+                            <div class="module-title">Systèmes embarqués</div>
+                            <p>Utilisation du projecteur de recherche (Nightsun), caméra thermique (FLIR), système de communication, équipements de navigation.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">5</div>
+                        <div class="module-content">
+                            <div class="module-title">Techniques de poursuite aérienne</div>
+                            <p>Coordination avec les unités au sol, techniques d'observation et de suivi, gestion des poursuites à haute vitesse.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">6</div>
+                        <div class="module-content">
+                            <div class="module-title">Opérations tactiques aériennes</div>
+                            <p>Soutien aux opérations SWAT, insertion d'équipes tactiques, surveillance de zones sensibles, coordination inter-services.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">7</div>
+                        <div class="module-content">
+                            <div class="module-title">Recherche et sauvetage</div>
+                            <p>Techniques de recherche aérienne, opérations de sauvetage en milieu urbain et rural, évacuations médicales.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">8</div>
+                        <div class="module-content">
+                            <div class="module-title">Procédures d'urgence</div>
+                            <p>Gestion des pannes moteur, autorotation, incendies à bord, conditions météorologiques extrêmes, atterrissages forcés.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Aéronefs utilisés</h3>
+                <p>Les stagiaires sont formés sur différents types d'aéronefs utilisés par l'A.S.D. :</p>
+                
+                <div class="aircraft-gallery">
+                    <div class="aircraft-card">
+                        <div class="aircraft-image" style="background-image: url('https://i.imgur.com/8XNrYLQ.jpg');"></div>
+                        <div class="aircraft-content">
+                            <div class="aircraft-name">Police Maverick</div>
+                            <p>Hélicoptère polyvalent utilisé pour les patrouilles quotidiennes, les poursuites et la surveillance.</p>
+                            <div class="aircraft-specs">
+                                <div class="aircraft-spec">
+                                    <span class="material-icons">speed</span>
+                                    <span>Vitesse max: 145 nœuds</span>
+                                </div>
+                                <div class="aircraft-spec">
+                                    <span class="material-icons">height</span>
+                                    <span>Plafond: 15,000 pieds</span>
+                                </div>
+                                <div class="aircraft-spec">
+                                    <span class="material-icons">group</span>
+                                    <span>Capacité: 4 personnes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="aircraft-card">
+                        <div class="aircraft-image" style="background-image: url('https://i.imgur.com/pQnQ7tR.jpg');"></div>
+                        <div class="aircraft-content">
+                            <div class="aircraft-name">Tactical Buzzard</div>
+                            <p>Hélicoptère tactique utilisé pour les opérations spéciales et le soutien aux unités SWAT.</p>
+                            <div class="aircraft-specs">
+                                <div class="aircraft-spec">
+                                    <span class="material-icons">speed</span>
+                                    <span>Vitesse max: 160 nœuds</span>
+                                </div>
+                                <div class="aircraft-spec">
+                                    <span class="material-icons">height</span>
+                                    <span>Plafond: 18,000 pieds</span>
+                                </div>
+                                <div class="aircraft-spec">
+                                    <span class="material-icons">group</span>
+                                    <span>Capacité: 6 personnes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <h4>Simulateur de vol</h4>
+                    <p>Une partie importante de la formation se déroule sur simulateur de vol avant de passer aux vols réels. Cela permet aux stagiaires de se familiariser avec les commandes et de s'entraîner aux situations d'urgence en toute sécurité.</p>
+                </div>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Équipement spécialisé</h3>
+                <p>Les membres de l'A.S.D. sont formés à l'utilisation d'équipements spécialisés :</p>
+                
+                <div class="equipment-grid">
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">highlight</span>
+                            Projecteur Nightsun
+                        </div>
+                        <p>Projecteur de 30 millions de candelas pour l'éclairage nocturne des zones d'opération</p>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">thermostat</span>
+                            Caméra thermique FLIR
+                        </div>
+                        <p>Système d'imagerie thermique pour la détection de suspects et la recherche de personnes</p>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">settings_input_antenna</span>
+                            Système de communication
+                        </div>
+                        <p>Radios multi-bandes pour la communication avec toutes les unités et services d'urgence</p>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">gps_fixed</span>
+                            Système de navigation
+                        </div>
+                        <p>GPS tactique avec cartographie détaillée de Los Santos et du comté de Blaine</p>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">videocam</span>
+                            Système d'enregistrement
+                        </div>
+                        <p>Caméras haute définition pour l'enregistrement des opérations et la collecte de preuves</p>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">flight_takeoff</span>
+                            Équipement de vol
+                        </div>
+                        <p>Casques de vol, combinaisons ignifugées, gilets de survie et équipement d'urgence</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Évaluation et certification</h3>
+                <p>Pour obtenir la certification A.S.D., les candidats doivent :</p>
+                <ul>
+                    <li>Réussir tous les examens théoriques avec un score minimum de 85%</li>
+                    <li>Valider au moins 40 heures de vol sous supervision</li>
+                    <li>Démontrer leur maîtrise de toutes les manœuvres de vol standard et d'urgence</li>
+                    <li>Réussir les exercices de coordination air-sol</li>
+                    <li>Passer avec succès l'examen final comprenant un vol de qualification</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <h4>Maintien de la qualification</h4>
+                    <p>Après certification, les pilotes de l'A.S.D. doivent :</p>
+                    <ul>
+                        <li>Effectuer au moins 8 heures de vol par mois</li>
+                        <li>Participer à un entraînement mensuel aux procédures d'urgence</li>
+                        <li>Passer une requalification complète tous les 12 mois</li>
+                        <li>Maintenir leur aptitude médicale avec un examen semestriel</li>
+                    </ul>
+                </div>
+                
+                <div class="instructor-section">
+                    <div class="instructor-title">Instructeurs principaux</div>
+                    <div class="instructor-list">
+                        <div class="instructor-card">
+                            <div class="instructor-name">Commandant Thomas Wright</div>
+                            <div class="instructor-rank">Chef de l'unité A.S.D.</div>
+                        </div>
+                        <div class="instructor-card">
+                            <div class="instructor-name">Lieutenant Emily Chen</div>
+                            <div class="instructor-rank">Instructrice en chef de vol</div>
+                        </div>
+                        <div class="instructor-card">
+                            <div class="instructor-name">Sergent Robert Jackson</div>
+                            <div class="instructor-rank">Spécialiste en opérations tactiques</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="formations_new.html" class="back-to-formations">
+                <span class="material-icons">arrow_back</span> Retour aux formations
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement_new.html">Règlement</a></li>
+                    <li><a href="formations_new.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+
+</html>

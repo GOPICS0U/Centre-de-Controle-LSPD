@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation S.W.A.T. - LSPD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour la page formation SWAT */
+        .formation-header {
+            background-color: rgba(26, 86, 167, 0.2);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formation-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--lspd-accent);
+        }
+
+        .formation-header h2 {
+            color: var(--lspd-accent);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .formation-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        .formation-section {
+            margin-bottom: 40px;
+        }
+
+        .formation-section h3 {
+            color: var(--lspd-light-blue);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .requirement-list, .module-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .requirement-list li, .module-list li {
+            margin: 10px 0;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--lspd-blue);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: all 0.3s ease;
+        }
+
+        .requirement-list li:hover, .module-list li:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+
+        .module-list li {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .module-number {
+            background-color: var(--lspd-blue);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .module-content {
+            flex-grow: 1;
+        }
+
+        .module-title {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--lspd-light-blue);
+        }
+
+        .instructor-section {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .instructor-title {
+            font-size: 1.2rem;
+            color: var(--lspd-light-blue);
+            margin-bottom: 15px;
+        }
+
+        .instructor-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .instructor-card {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            width: calc(33.333% - 14px);
+            min-width: 200px;
+        }
+
+        .instructor-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .instructor-rank {
+            font-size: 0.9rem;
+            color: var(--lspd-light-blue);
+        }
+
+        .back-to-formations {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--lspd-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-formations:hover {
+            background-color: var(--lspd-dark-blue);
+            transform: translateY(-3px);
+        }
+
+        .warning-box {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .warning-box h4 {
+            color: #e74c3c;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-box h4::before {
+            content: '⚠️';
+            font-size: 1.2rem;
+        }
+
+        .tip-box {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .tip-box h4 {
+            color: #27ae60;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-box h4::before {
+            content: '💡';
+            font-size: 1.2rem;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .equipment-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .equipment-item:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .equipment-name {
+            font-weight: 500;
+            color: var(--lspd-light-blue);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .equipment-name .material-icons {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .formation-header {
+                padding: 20px;
+            }
+            
+            .formation-header h2 {
+                font-size: 1.7rem;
+            }
+            
+            .instructor-card {
+                width: 100%;
+            }
+            
+            .equipment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new.html">Arrestation</a>
+                        <a href="DM_new.html">Droits Miranda</a>
+                        <a href="I&MED_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Formations</a>
+                    <div class="dropdown-content">
+                        <a href="formation_swat.html">S.W.A.T.</a>
+                        <a href="formation_asd.html">A.S.D.</a>
+                        <a href="formation_mary.html">M.A.R.Y.</a>
+                        <a href="formation_k9.html">K-9</a>
+                        <a href="formation_fto.html">F.T.O.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Formation S.W.A.T.</h1>
+        <p>Special Weapons And Tactics</p>
+    </header>
+
+    <main>
+        <section class="fade-up">
+            <div class="formation-header">
+                <h2>Programme de formation S.W.A.T.</h2>
+                <p>Le Special Weapons And Tactics (S.W.A.T.) est une unité d'élite du LSPD spécialisée dans les interventions à haut risque. Cette formation intensive de 4 semaines prépare les agents aux situations les plus dangereuses, incluant les prises d'otages, le contre-terrorisme et les opérations spéciales.</p>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Conditions d'admission</h3>
+                <ul class="requirement-list">
+                    <li>Être officier de police assermenté depuis au moins 2 ans</li>
+                    <li>Avoir un dossier disciplinaire exemplaire</li>
+                    <li>Avoir obtenu une note minimale de 85% au test de tir annuel</li>
+                    <li>Réussir les tests physiques spécifiques au S.W.A.T.</li>
+                    <li>Passer avec succès l'évaluation psychologique</li>
+                    <li>Obtenir la recommandation d'un supérieur (Lieutenant ou plus)</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <h4>Test physique</h4>
+                    <p>Le test physique d'entrée comprend :</p>
+                    <ul>
+                        <li>Course de 2,5 km en moins de 12 minutes</li>
+                        <li>50 pompes en 2 minutes</li>
+                        <li>60 abdominaux en 2 minutes</li>
+                        <li>15 tractions</li>
+                        <li>Parcours d'obstacles tactique en moins de 4 minutes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Programme de formation</h3>
+                <p>La formation S.W.A.T. est divisée en plusieurs modules, combinant théorie et pratique intensive :</p>
+                
+                <ul class="module-list">
+                    <li>
+                        <div class="module-number">1</div>
+                        <div class="module-content">
+                            <div class="module-title">Tactiques d'entrée et de dégagement</div>
+                            <p>Techniques d'entrée dynamique et méthodique, dégagement de pièces, progression en milieu hostile, utilisation des boucliers balistiques.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">2</div>
+                        <div class="module-content">
+                            <div class="module-title">Tir tactique avancé</div>
+                            <p>Tir de précision, tir en mouvement, tir en conditions de stress, transition entre armes primaires et secondaires, tir en faible luminosité.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">3</div>
+                        <div class="module-content">
+                            <div class="module-title">Négociation et gestion des otages</div>
+                            <p>Techniques de négociation, psychologie des preneurs d'otages, évaluation des menaces, planification des interventions en situation de crise.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">4</div>
+                        <div class="module-content">
+                            <div class="module-title">Explosifs et breaching</div>
+                            <p>Reconnaissance des explosifs, techniques de neutralisation, utilisation des charges de brèche, entrée explosive contrôlée.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">5</div>
+                        <div class="module-content">
+                            <div class="module-title">Opérations en milieu urbain</div>
+                            <p>Progression en zone urbaine, sécurisation de bâtiments, opérations en hauteur, descente en rappel, intervention en véhicule.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">6</div>
+                        <div class="module-content">
+                            <div class="module-title">Armes et équipements spécialisés</div>
+                            <p>Maniement des armes spéciales, utilisation des moyens non létaux, grenades assourdissantes, gaz lacrymogènes, tasers avancés.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">7</div>
+                        <div class="module-content">
+                            <div class="module-title">Premiers secours tactiques</div>
+                            <p>Soins sous le feu, contrôle des hémorragies, évacuation des blessés en zone hostile, triage des victimes multiples.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">8</div>
+                        <div class="module-content">
+                            <div class="module-title">Exercices de simulation</div>
+                            <p>Scénarios complets d'intervention, exercices grandeur nature, simulations de prise d'otages, attaques terroristes et interventions à haut risque.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Équipement spécialisé</h3>
+                <p>Les membres du S.W.A.T. sont formés à l'utilisation d'équipements spécialisés :</p>
+                
+                <div class="equipment-grid">
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">security</span>
+                            Protection balistique
+                        </div>
+                        <p>Gilets pare-balles niveau IV, casques balistiques, boucliers tactiques</p>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">gps_fixed</span>
+                            Armement tactique
+                        </div>
+                        <p>Fusils d'assaut, fusils de précision, armes de poing spéciales, lanceurs non létaux</p>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">visibility</span>
+                            Équipement optique
+                        </div>
+                        <p>Lunettes de vision nocturne, caméras thermiques, dispositifs de visée laser</p>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">settings_input_antenna</span>
+                            Communication
+                        </div>
+                        <p>Systèmes de communication cryptés, oreillettes tactiques, microphones de gorge</p>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">build</span>
+                            Équipement d'entrée
+                        </div>
+                        <p>Béliers, écarteurs hydrauliques, charges de brèche, outils de crochetage</p>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-name">
+                            <span class="material-icons">local_hospital</span>
+                            Équipement médical
+                        </div>
+                        <p>Kits de premiers secours tactiques, tourniquets, pansements hémostatiques</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Évaluation et certification</h3>
+                <p>Pour obtenir la certification S.W.A.T., les candidats doivent :</p>
+                <ul>
+                    <li>Réussir tous les examens théoriques avec un score minimum de 80%</li>
+                    <li>Valider toutes les épreuves pratiques</li>
+                    <li>Démontrer une maîtrise parfaite des armes et équipements</li>
+                    <li>Réussir l'exercice final de simulation de crise</li>
+                    <li>Maintenir les standards physiques tout au long de la formation</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <h4>Maintien des compétences</h4>
+                    <p>Après certification, les membres du S.W.A.T. doivent participer à des entraînements hebdomadaires et passer une requalification complète tous les 6 mois.</p>
+                </div>
+                
+                <div class="instructor-section">
+                    <div class="instructor-title">Instructeurs principaux</div>
+                    <div class="instructor-list">
+                        <div class="instructor-card">
+                            <div class="instructor-name">Capitaine Michael Reynolds</div>
+                            <div class="instructor-rank">Commandant de l'unité S.W.A.T.</div>
+                        </div>
+                        <div class="instructor-card">
+                            <div class="instructor-name">Lieutenant Sarah Martinez</div>
+                            <div class="instructor-rank">Spécialiste en tactiques d'entrée</div>
+                        </div>
+                        <div class="instructor-card">
+                            <div class="instructor-name">Sergent James Wilson</div>
+                            <div class="instructor-rank">Expert en armement et tir</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="formations_new.html" class="back-to-formations">
+                <span class="material-icons">arrow_back</span> Retour aux formations
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement_new.html">Règlement</a></li>
+                    <li><a href="formations_new.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+
+</html>

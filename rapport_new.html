@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générer Rapport - LSPD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour les formulaires */
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+        }
+
+        .container {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .container h2 {
+            color: var(--lspd-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--lspd-accent);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius);
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--lspd-accent);
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.25);
+        }
+
+        .preview-container {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .preview-item {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preview-item span:first-child {
+            font-weight: 600;
+            color: var(--lspd-accent);
+            margin-bottom: 5px;
+        }
+
+        .preview-textarea {
+            width: 100%;
+            height: 400px;
+            padding: 15px;
+            background-color: rgba(10, 22, 34, 0.8);
+            border: 1px solid var(--lspd-blue);
+            border-radius: var(--border-radius);
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: none;
+            margin-top: 20px;
+        }
+
+        .info-text, .info-ID {
+            background-color: rgba(172, 0, 0, 0.1);
+            border-left: 3px solid #ac0000;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            color: #ff6b6b;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .btn-copy {
+            background-color: var(--lspd-accent);
+            color: var(--lspd-dark-blue);
+            border: none;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-copy:hover {
+            background-color: #e6b800;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-copy:before {
+            content: '📋';
+            font-size: 1.2rem;
+        }
+
+        .theme-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .theme-option {
+            flex: 1;
+            min-width: 120px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .theme-option:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .theme-option.active {
+            border-color: var(--lspd-accent);
+            background-color: rgba(26, 86, 167, 0.2);
+        }
+
+        .theme-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .theme-name {
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                flex-direction: column;
+                margin-top: 120px;
+            }
+            
+            .theme-selector {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new.html">Arrestation</a>
+                        <a href="DM_new.html">Droits Miranda</a>
+                        <a href="I&MED_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <a href="formations_new.html">Formations</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Générer un Rapport</h1>
+        <p>Remplissez le formulaire pour générer automatiquement un rapport d'intervention.</p>
+    </header>
+
+    <!-- Form and Preview Section -->
+    <div class="form-container">
+        <!-- Form Section -->
+        <div class="container">
+            <h2>Formulaire de Rapport</h2>
+            
+            <!-- Thème du rapport -->
+            <div class="form-group">
+                <label for="theme">Choisir un thème de rapport :</label>
+                <div class="theme-selector">
+                    <div class="theme-option active" data-theme="standard">
+                        <div class="theme-icon">📝</div>
+                        <div class="theme-name">Standard</div>
+                    </div>
+                    <div class="theme-option" data-theme="emergency">
+                        <div class="theme-icon">🚨</div>
+                        <div class="theme-name">Urgence</div>
+                    </div>
+                    <div class="theme-option" data-theme="hostage">
+                        <div class="theme-icon">⚠️</div>
+                        <div class="theme-name">Prise d'Otage</div>
+                    </div>
+                    <div class="theme-option" data-theme="theft">
+                        <div class="theme-icon">🚔</div>
+                        <div class="theme-name">Vol</div>
+                    </div>
+                </div>
+                <select id="theme" name="theme" style="display: none;">
+                    <option value="standard">Rapport Standard</option>
+                    <option value="emergency">Rapport d'Urgence</option>
+                    <option value="hostage">Rapport Prise d'Otage</option>
+                    <option value="theft">Rapport Vol</option>
+                </select>
+            </div>
+            
+            <form id="objectReportForm">
+                <div class="form-group">
+                    <label for="service">Service :</label>
+                    <input type="text" id="service" name="service" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date du rapport :</label>
+                    <input type="datetime-local" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="officers">ID des agents impliqués (séparés par des retours à la ligne) :</label>
+                    <textarea id="officers" name="officers" rows="3" required></textarea>
+                </div>
+                <div id="InfoID" class="info-ID">
+                    <strong>Format requis: &lt;@0000000000000&gt; (un ID par ligne)</strong>
+                </div>
+                <div class="form-group">
+                    <label for="object">Objet du rapport :</label>
+                    <input type="text" id="object" name="object" required>
+                </div>
+                <div class="form-group">
+                    <label for="facts">Déroulement des faits :</label>
+                    <textarea id="facts" name="facts" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="situation">Situation sur place :</label>
+                    <textarea id="situation" name="situation" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="hostages">Les individus impliqués :</label>
+                    <textarea id="hostages" name="hostages" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="postHostage">Déroulement après la situation :</label>
+                    <textarea id="postHostage" name="postHostage" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="observations">Observations supplémentaires :</label>
+                    <textarea id="observations" name="observations" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="agentSignature">ID de l'agent signataire :</label>
+                    <input type="text" id="agentSignature" name="agentSignature" required>
+                </div>
+
+                <button type="button" class="btn-copy" onclick="generateReport()">Générer le Rapport</button>
+            </form>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="container">
+            <h2>Prévisualisation</h2>
+            <div class="preview-container">
+                <div class="preview-item"><span>Agents impliqués :</span> <span id="previewOfficers">Non
+                        renseigné</span></div>
+                <div class="preview-item"><span>Objet :</span> <span id="previewObject">Non renseigné</span></div>
+                <div class="preview-item"><span>Date :</span> <span id="previewDate">Non renseigné</span></div>
+                <div class="preview-item"><span>Déroulement des faits :</span> <span id="previewFacts">Non
+                        renseigné</span></div>
+                <div class="preview-item"><span>Situation sur place :</span> <span id="previewSituation">Non
+                        renseigné</span></div>
+                <div class="preview-item"><span>Observations :</span> <span id="previewObservations">Non
+                        renseigné</span></div>
+                <textarea class="preview-textarea" id="reportPreviewText" readonly></textarea>
+
+                <div id="InfoText" class="info-text">
+                    <strong>N'oubliez pas d'ajouter des photos directement sur Discord pour compléter votre rapport.</strong>
+                </div>
+
+                <button class="btn-copy" onclick="copyToClipboard('reportPreviewText')">Copier le rapport</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement.html">Règlement</a></li>
+                    <li><a href="formations.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sélection du thème avec interface visuelle
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Retirer la classe active de toutes les options
+                document.querySelectorAll('.theme-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                
+                // Ajouter la classe active à l'option cliquée
+                this.classList.add('active');
+                
+                // Mettre à jour la valeur du select caché
+                document.getElementById('theme').value = this.getAttribute('data-theme');
+            });
+        });
+
+        function generateReport() {
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const officers = document.getElementById('officers').value.split("\n").map(id => id.trim()).join(", ");
+            const object = document.getElementById('object').value;
+            const facts = document.getElementById('facts').value;
+            const situation = document.getElementById('situation').value;
+            const hostages = document.getElementById('hostages').value;
+            const postHostage = document.getElementById('postHostage').value;
+            const observations = document.getElementById('observations').value;
+            const agentSignature = document.getElementById('agentSignature').value;
+            const theme = document.getElementById('theme').value;
+
+            let themeText = '';
+            let additionalInfo = '';
+            let themeEmoji = '';
+
+            // Personnalisation du rapport en fonction du thème
+            if (theme === 'emergency') {
+                themeEmoji = '🚨';
+                themeText = "🚨 RAPPORT D'URGENCE 🚨\n\n";
+                additionalInfo = "Actions urgentes entreprises : Intervention rapide, sécurisation du périmètre, coordination avec les services d'urgence.\n";
+            } else if (theme === 'hostage') {
+                themeEmoji = '⚠️';
+                themeText = "⚠️ RAPPORT PRISE D'OTAGE ⚠️\n\n";
+                additionalInfo = "Protocole de négociation activé, équipe d'intervention en position, coordination avec les unités tactiques.\n";
+            } else if (theme === 'theft') {
+                themeEmoji = '🚔';
+                themeText = "🚔 RAPPORT VOL 🚔\n\n";
+                additionalInfo = "Enquête en cours, relevé d'indices effectué, recherche de témoins et analyse des caméras de surveillance.\n";
+            } else {
+                themeEmoji = '📝';
+                themeText = "📝 RAPPORT STANDARD 📝\n\n";
+            }
+
+            // Formatage de la date pour l'affichage
+            const formattedDate = formatDate(date);
+
+            // Mise à jour de la prévisualisation
+            document.getElementById('previewOfficers').textContent = officers;
+            document.getElementById('previewObject').textContent = object;
+            document.getElementById('previewDate').textContent = formattedDate;
+            document.getElementById('previewFacts').textContent = facts;
+            document.getElementById('previewSituation').textContent = situation;
+            document.getElementById('previewObservations').textContent = observations;
+
+            const reportText = `
+**Rapport de Police** ${themeEmoji}
+**Service :** ${service}  
+**Date :** ${formattedDate}  
+
+${themeText}
+
+**Agents impliqués :** ${officers}
+
+**Objet :** ${object}  
+**Déroulement des faits :** ${facts}  
+
+**Situation sur place :** ${situation}  
+
+${hostages ? `**Les individus impliqués :**\n${hostages}\n\n` : ''}
+${postHostage ? `**Déroulement après la situation :** ${postHostage}\n\n` : ''}
+${observations ? `**Observations supplémentaires :** ${observations}\n\n` : ''}
+
+${additionalInfo}
+
+**Signature de l'agent :** <@${agentSignature}>
+            `;
+
+            document.getElementById('reportPreviewText').value = reportText;
+            
+            // Animation de la prévisualisation
+            const previewContainer = document.querySelector('.preview-container');
+            previewContainer.style.animation = 'none';
+            setTimeout(() => {
+                previewContainer.style.animation = 'fadeIn 0.5s ease-out';
+            }, 10);
+        }
+
+        // Fonction pour formater la date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            
+            return `${day}/${month}/${year} à ${hours}h${minutes}`;
+        }
+
+        // Initialiser la date actuelle
+        window.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            
+            const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
+            document.getElementById('date').value = formattedDate;
+        });
+    </script>
+    
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+
+</html>

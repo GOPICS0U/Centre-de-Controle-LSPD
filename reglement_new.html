@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Règlement Interne du L.S.P.D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour la page de règlement */
+        .rule-section {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--lspd-accent);
+            transition: all 0.3s ease;
+        }
+
+        .rule-section:hover {
+            background-color: rgba(26, 86, 167, 0.15);
+            transform: translateX(5px);
+        }
+
+        .rule-section h3 {
+            color: var(--lspd-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+
+        .rule-list {
+            list-style-type: decimal;
+            padding-left: 25px;
+        }
+
+        .rule-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(10, 46, 92, 0.3);
+            border-left: 3px solid var(--lspd-blue);
+            border-radius: 4px;
+        }
+
+        .rule-list li:hover {
+            background: rgba(10, 46, 92, 0.5);
+        }
+
+        .important-note {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .important-note h4 {
+            color: #e74c3c;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--lspd-accent);
+            color: var(--lspd-dark-blue);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .table-of-contents {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table-of-contents h3 {
+            color: var(--lspd-accent);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .table-of-contents ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .table-of-contents li {
+            margin: 8px 0;
+            padding: 8px 15px;
+            background: none;
+            border-left: 2px solid var(--lspd-blue);
+            transition: all 0.2s ease;
+        }
+
+        .table-of-contents li:hover {
+            border-left-color: var(--lspd-accent);
+            background-color: rgba(26, 86, 167, 0.2);
+        }
+
+        .table-of-contents a {
+            color: var(--light-text);
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s ease;
+        }
+
+        .table-of-contents a:hover {
+            color: var(--lspd-accent);
+        }
+
+        @media (max-width: 768px) {
+            .rule-section {
+                padding: 15px;
+            }
+            
+            .rule-list {
+                padding-left: 20px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new.html">Arrestation</a>
+                        <a href="DM_new.html">Droits Miranda</a>
+                        <a href="I&MED_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Formations</a>
+                    <div class="dropdown-content">
+                        <a href="formations_new.html">Toutes les formations</a>
+                        <a href="formation_swat.html">S.W.A.T.</a>
+                        <a href="formation_asd.html">A.S.D.</a>
+                        <a href="formation_mary.html">M.A.R.Y.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Règlement Interne du L.S.P.D</h1>
+        <p>Directives et règles à respecter par tous les agents du Los Santos Police Department</p>
+    </header>
+
+    <main>
+        <!-- Table des matières -->
+        <div class="table-of-contents">
+            <h3>Table des matières</h3>
+            <ul>
+                <li><a href="#section1">Article 1 - Comportement général</a></li>
+                <li><a href="#section2">Article 2 - Tenue et équipement</a></li>
+                <li><a href="#section3">Article 3 - Communication</a></li>
+                <li><a href="#section4">Article 4 - Procédures d'intervention</a></li>
+                <li><a href="#section5">Article 5 - Hiérarchie et respect</a></li>
+                <li><a href="#section6">Article 6 - Sanctions</a></li>
+            </ul>
+        </div>
+
+        <!-- Section 1 -->
+        <section id="section1" class="fade-up">
+            <h2>Article 1 - Comportement général</h2>
+            
+            <div class="rule-section">
+                <h3>1.1 Conduite professionnelle</h3>
+                <ol class="rule-list">
+                    <li>Tout agent du LSPD doit faire preuve de professionnalisme en toutes circonstances.</li>
+                    <li>Le respect des citoyens est primordial, quelle que soit la situation.</li>
+                    <li>L'usage de la force doit être proportionné à la menace rencontrée.</li>
+                    <li>La corruption sous toutes ses formes est strictement interdite et passible de renvoi immédiat.</li>
+                    <li>Les agents doivent être exemplaires, même en dehors de leur service.</li>
+                </ol>
+            </div>
+            
+            <div class="rule-section">
+                <h3>1.2 Éthique et intégrité</h3>
+                <ol class="rule-list">
+                    <li>Les agents ne doivent pas accepter de pots-de-vin ou d'avantages personnels.</li>
+                    <li>Toute information confidentielle doit rester au sein du département.</li>
+                    <li>Les conflits d'intérêts doivent être signalés à la hiérarchie.</li>
+                    <li>Les agents doivent signaler tout comportement suspect de leurs collègues.</li>
+                </ol>
+            </div>
+            
+            <div class="important-note">
+                <h4>Note importante</h4>
+                <p>Tout manquement à ces règles fondamentales peut entraîner des sanctions disciplinaires pouvant aller jusqu'au renvoi définitif du LSPD.</p>
+            </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section id="section2" class="fade-up">
+            <h2>Article 2 - Tenue et équipement</h2>
+            
+            <div class="rule-section">
+                <h3>2.1 Uniforme réglementaire</h3>
+                <ol class="rule-list">
+                    <li>L'uniforme doit être porté correctement et maintenu en bon état.</li>
+                    <li>Le port du gilet pare-balles est obligatoire lors des interventions à risque.</li>
+                    <li>Les insignes et badges doivent être visibles en tout temps.</li>
+                    <li>Les modifications non autorisées de l'uniforme sont interdites.</li>
+                </ol>
+            </div>
+            
+            <div class="rule-section">
+                <h3>2.2 Équipement et armement</h3>
+                <ol class="rule-list">
+                    <li>Les armes de service doivent être entretenues régulièrement.</li>
+                    <li>L'équipement tactique ne doit être utilisé que lors des opérations qui le nécessitent.</li>
+                    <li>Tout équipement endommagé doit être signalé immédiatement.</li>
+                    <li>L'utilisation d'équipements personnels non approuvés est interdite.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section id="section3" class="fade-up">
+            <h2>Article 3 - Communication</h2>
+            
+            <div class="rule-section">
+                <h3>3.1 Communication radio</h3>
+                <ol class="rule-list">
+                    <li>Les communications radio doivent rester professionnelles et concises.</li>
+                    <li>Les codes radio officiels doivent être utilisés lors des transmissions.</li>
+                    <li>Les informations sensibles ne doivent pas être partagées sur les fréquences non sécurisées.</li>
+                    <li>Toute panne de communication doit être signalée rapidement.</li>
+                </ol>
+            </div>
+            
+            <div class="rule-section">
+                <h3>3.2 Relations avec les médias</h3>
+                <ol class="rule-list">
+                    <li>Seuls les officiers désignés sont autorisés à s'adresser aux médias.</li>
+                    <li>Aucune information sur les enquêtes en cours ne doit être divulguée.</li>
+                    <li>Les déclarations publiques doivent être approuvées par la hiérarchie.</li>
+                    <li>Les réseaux sociaux doivent être utilisés avec discernement.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section id="section4" class="fade-up">
+            <h2>Article 4 - Procédures d'intervention</h2>
+            
+            <div class="rule-section">
+                <h3>4.1 Interventions standard</h3>
+                <ol class="rule-list">
+                    <li>Les procédures d'intervention doivent être suivies à la lettre.</li>
+                    <li>La sécurité des civils est la priorité absolue.</li>
+                    <li>Les droits des suspects doivent être respectés en toutes circonstances.</li>
+                    <li>Les rapports d'intervention doivent être complets et précis.</li>
+                </ol>
+            </div>
+            
+            <div class="rule-section">
+                <h3>4.2 Situations d'urgence</h3>
+                <ol class="rule-list">
+                    <li>Les protocoles DEFCON doivent être activés selon la gravité de la situation.</li>
+                    <li>La chaîne de commandement doit être respectée même en situation de crise.</li>
+                    <li>Les demandes de renforts doivent être claires et justifiées.</li>
+                    <li>Les débriefings post-intervention sont obligatoires.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section id="section5" class="fade-up">
+            <h2>Article 5 - Hiérarchie et respect</h2>
+            
+            <div class="rule-section">
+                <h3>5.1 Structure hiérarchique</h3>
+                <ol class="rule-list">
+                    <li>Les ordres des supérieurs doivent être exécutés sans délai.</li>
+                    <li>Le respect de la hiérarchie est fondamental au bon fonctionnement du département.</li>
+                    <li>Les désaccords doivent être exprimés en privé et de manière respectueuse.</li>
+                    <li>Les promotions sont basées sur le mérite et l'ancienneté.</li>
+                </ol>
+            </div>
+            
+            <div class="rule-section">
+                <h3>5.2 Collaboration interne</h3>
+                <ol class="rule-list">
+                    <li>La coopération entre les différentes unités est essentielle.</li>
+                    <li>Le partage d'informations doit se faire dans le respect des protocoles.</li>
+                    <li>Les conflits personnels ne doivent pas interférer avec le travail.</li>
+                    <li>L'entraide entre collègues est encouragée.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section id="section6" class="fade-up">
+            <h2>Article 6 - Sanctions</h2>
+            
+            <div class="rule-section">
+                <h3>6.1 Échelle des sanctions</h3>
+                <ol class="rule-list">
+                    <li>Avertissement verbal pour les infractions mineures.</li>
+                    <li>Avertissement écrit pour les récidives ou infractions plus graves.</li>
+                    <li>Suspension temporaire pour les manquements sérieux.</li>
+                    <li>Rétrogradation en cas de faute grave.</li>
+                    <li>Renvoi définitif pour les infractions majeures ou récidives multiples.</li>
+                </ol>
+            </div>
+            
+            <div class="rule-section">
+                <h3>6.2 Procédure disciplinaire</h3>
+                <ol class="rule-list">
+                    <li>Toute procédure disciplinaire doit être documentée.</li>
+                    <li>Les agents ont droit à une défense équitable.</li>
+                    <li>Les sanctions doivent être proportionnées à la faute commise.</li>
+                    <li>Les décisions disciplinaires peuvent faire l'objet d'un appel.</li>
+                </ol>
+            </div>
+            
+            <div class="important-note">
+                <h4>Engagement</h4>
+                <p>En rejoignant le LSPD, chaque agent s'engage à respecter ce règlement dans son intégralité. Le non-respect de ces règles peut entraîner des conséquences disciplinaires.</p>
+            </div>
+        </section>
+    </main>
+
+    <a href="#" class="back-to-top" id="backToTop">
+        <span class="material-icons">arrow_upward</span>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement_new.html">Règlement</a></li>
+                    <li><a href="formations_new.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+    <script>
+        // Script pour le bouton "Retour en haut"
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            
+            // Afficher/masquer le bouton en fonction du défilement
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            // Défilement fluide vers le haut
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Animation des sections au défilement
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+
+</html>

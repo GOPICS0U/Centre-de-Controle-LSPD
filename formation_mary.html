@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation M.A.R.Y. - LSPD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour la page formation MARY */
+        .formation-header {
+            background-color: rgba(26, 86, 167, 0.2);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formation-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--lspd-accent);
+        }
+
+        .formation-header h2 {
+            color: var(--lspd-accent);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .formation-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        .formation-section {
+            margin-bottom: 40px;
+        }
+
+        .formation-section h3 {
+            color: var(--lspd-light-blue);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .requirement-list, .module-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .requirement-list li, .module-list li {
+            margin: 10px 0;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--lspd-blue);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: all 0.3s ease;
+        }
+
+        .requirement-list li:hover, .module-list li:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+
+        .module-list li {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .module-number {
+            background-color: var(--lspd-blue);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .module-content {
+            flex-grow: 1;
+        }
+
+        .module-title {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--lspd-light-blue);
+        }
+
+        .instructor-section {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .instructor-title {
+            font-size: 1.2rem;
+            color: var(--lspd-light-blue);
+            margin-bottom: 15px;
+        }
+
+        .instructor-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .instructor-card {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            width: calc(33.333% - 14px);
+            min-width: 200px;
+        }
+
+        .instructor-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .instructor-rank {
+            font-size: 0.9rem;
+            color: var(--lspd-light-blue);
+        }
+
+        .back-to-formations {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--lspd-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-formations:hover {
+            background-color: var(--lspd-dark-blue);
+            transform: translateY(-3px);
+        }
+
+        .warning-box {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .warning-box h4 {
+            color: #e74c3c;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-box h4::before {
+            content: '⚠️';
+            font-size: 1.2rem;
+        }
+
+        .tip-box {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .tip-box h4 {
+            color: #27ae60;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-box h4::before {
+            content: '💡';
+            font-size: 1.2rem;
+        }
+
+        .case-studies {
+            margin-top: 20px;
+        }
+
+        .case-study {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 3px solid #3498db;
+        }
+
+        .case-title {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--lspd-light-blue);
+            margin-bottom: 10px;
+        }
+
+        .case-description {
+            margin-bottom: 15px;
+        }
+
+        .case-lessons {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+        }
+
+        .case-lessons h5 {
+            color: var(--lspd-accent);
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .case-lessons ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .case-lessons li {
+            margin: 5px 0;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tool-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .tool-name {
+            font-weight: 500;
+            color: var(--lspd-light-blue);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tool-name .material-icons {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .formation-header {
+                padding: 20px;
+            }
+            
+            .formation-header h2 {
+                font-size: 1.7rem;
+            }
+            
+            .instructor-card {
+                width: 100%;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new.html">Arrestation</a>
+                        <a href="DM_new.html">Droits Miranda</a>
+                        <a href="I&MED_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Formations</a>
+                    <div class="dropdown-content">
+                        <a href="formation_swat.html">S.W.A.T.</a>
+                        <a href="formation_asd.html">A.S.D.</a>
+                        <a href="formation_mary.html">M.A.R.Y.</a>
+                        <a href="formation_k9.html">K-9</a>
+                        <a href="formation_fto.html">F.T.O.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Formation M.A.R.Y.</h1>
+        <p>Major Crimes Division</p>
+    </header>
+
+    <main>
+        <section class="fade-up">
+            <div class="formation-header">
+                <h2>Programme de formation M.A.R.Y.</h2>
+                <p>La Major Crimes Division (M.A.R.Y.) est une unité d'élite du LSPD spécialisée dans l'investigation des crimes graves et complexes. Cette formation intensive de 5 semaines prépare les détectives aux enquêtes criminelles avancées pour résoudre les homicides, enlèvements, crimes organisés et autres affaires majeures.</p>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Conditions d'admission</h3>
+                <ul class="requirement-list">
+                    <li>Être officier de police assermenté depuis au moins 3 ans</li>
+                    <li>Avoir servi au moins 1 an comme détective dans une unité d'enquête</li>
+                    <li>Avoir un dossier disciplinaire exemplaire</li>
+                    <li>Posséder d'excellentes compétences analytiques et rédactionnelles</li>
+                    <li>Réussir l'examen écrit d'aptitude à l'investigation</li>
+                    <li>Passer avec succès l'entretien avec le comité de sélection</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <h4>Préparation à l'examen</h4>
+                    <p>L'examen d'aptitude à l'investigation évalue :</p>
+                    <ul>
+                        <li>Connaissances juridiques approfondies</li>
+                        <li>Capacité à analyser des scènes de crime complexes</li>
+                        <li>Compétences en rédaction de rapports d'enquête</li>
+                        <li>Aptitude à reconstituer une chronologie d'événements</li>
+                        <li>Capacité à identifier les incohérences dans les témoignages</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Programme de formation</h3>
+                <p>La formation M.A.R.Y. est structurée en modules spécialisés :</p>
+                
+                <ul class="module-list">
+                    <li>
+                        <div class="module-number">1</div>
+                        <div class="module-content">
+                            <div class="module-title">Analyse avancée de scènes de crime</div>
+                            <p>Techniques de préservation et d'analyse des scènes de crime complexes, documentation exhaustive, reconstruction des événements, coordination avec les techniciens scientifiques.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">2</div>
+                        <div class="module-content">
+                            <div class="module-title">Criminalistique et médecine légale</div>
+                            <p>Interprétation des rapports d'autopsie, analyse des traces de sang, balistique, entomologie forensique, anthropologie médico-légale, toxicologie.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">3</div>
+                        <div class="module-content">
+                            <div class="module-title">Techniques d'interrogatoire avancées</div>
+                            <p>Méthodes d'interrogatoire pour suspects de crimes graves, détection de mensonge, analyse comportementale, stratégies pour obtenir des aveux, interrogatoires prolongés.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">4</div>
+                        <div class="module-content">
+                            <div class="module-title">Profilage criminel</div>
+                            <p>Analyse victimologique, établissement de profils d'auteurs, analyse des signatures criminelles, évaluation de la dangerosité, prédiction comportementale.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">5</div>
+                        <div class="module-content">
+                            <div class="module-title">Investigation numérique</div>
+                            <p>Analyse des preuves numériques, récupération de données, analyse des métadonnées, investigation sur les réseaux sociaux, traçage des communications.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">6</div>
+                        <div class="module-content">
+                            <div class="module-title">Crime organisé et réseaux criminels</div>
+                            <p>Structure des organisations criminelles, techniques d'infiltration, utilisation d'informateurs, surveillance à long terme, enquêtes financières.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">7</div>
+                        <div class="module-content">
+                            <div class="module-title">Préparation des dossiers judiciaires</div>
+                            <p>Constitution de dossiers d'accusation solides, préparation des témoignages en cour, collaboration avec les procureurs, anticipation des stratégies de défense.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="module-number">8</div>
+                        <div class="module-content">
+                            <div class="module-title">Cas pratiques et simulations</div>
+                            <p>Résolution d'affaires complexes simulées, cold cases réels, exercices de reconstitution, simulations de procès.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Études de cas</h3>
+                <p>La formation inclut l'analyse de cas réels pour développer les compétences d'investigation :</p>
+                
+                <div class="case-studies">
+                    <div class="case-study">
+                        <div class="case-title">L'affaire du Tueur de Vinewood</div>
+                        <div class="case-description">
+                            <p>Série de meurtres rituels dans le quartier de Vinewood qui a nécessité une analyse comportementale poussée et l'établissement d'un profil psychologique précis pour identifier le suspect.</p>
+                        </div>
+                        <div class="case-lessons">
+                            <h5>Leçons clés :</h5>
+                            <ul>
+                                <li>Importance de l'analyse des signatures criminelles</li>
+                                <li>Utilisation des preuves matérielles pour confirmer le profil</li>
+                                <li>Coordination entre différentes juridictions</li>
+                                <li>Gestion de la pression médiatique</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="case-study">
+                        <div class="case-title">Le réseau de trafic de Blaine County</div>
+                        <div class="case-description">
+                            <p>Démantèlement d'un réseau de trafic de drogue et d'armes opérant dans le comté de Blaine, impliquant des infiltrations à long terme et une vaste opération de surveillance.</p>
+                        </div>
+                        <div class="case-lessons">
+                            <h5>Leçons clés :</h5>
+                            <ul>
+                                <li>Techniques d'infiltration et gestion des informateurs</li>
+                                <li>Coordination des opérations de surveillance</li>
+                                <li>Suivi des flux financiers illicites</li>
+                                <li>Construction méthodique d'un dossier contre une organisation entière</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="case-study">
+                        <div class="case-title">L'enlèvement de la famille Richardson</div>
+                        <div class="case-description">
+                            <p>Enquête sur l'enlèvement d'une famille fortunée de Los Santos, impliquant des demandes de rançon et une course contre la montre pour retrouver les victimes.</p>
+                        </div>
+                        <div class="case-lessons">
+                            <h5>Leçons clés :</h5>
+                            <ul>
+                                <li>Gestion des enquêtes sous pression temporelle</li>
+                                <li>Négociation avec les ravisseurs</li>
+                                <li>Analyse des communications et localisation des suspects</li>
+                                <li>Coordination des équipes d'intervention</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Outils et technologies</h3>
+                <p>Les détectives de la M.A.R.Y. sont formés à l'utilisation d'outils et technologies spécialisés :</p>
+                
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-name">
+                            <span class="material-icons">search</span>
+                            Système AFIS
+                        </div>
+                        <p>Système automatisé d'identification des empreintes digitales avec accès aux bases de données nationales et internationales</p>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">
+                            <span class="material-icons">dna</span>
+                            Analyse ADN rapide
+                        </div>
+                        <p>Équipement d'analyse ADN portable permettant d'obtenir des résultats préliminaires sur le terrain</p>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">
+                            <span class="material-icons">computer</span>
+                            Logiciel VICAP
+                        </div>
+                        <p>Programme d'analyse comportementale et de corrélation entre différentes affaires criminelles</p>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">
+                            <span class="material-icons">timeline</span>
+                            Logiciel de chronologie
+                        </div>
+                        <p>Outil de visualisation temporelle permettant de reconstituer précisément le déroulement des événements</p>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">
+                            <span class="material-icons">phone_iphone</span>
+                            Extraction de données mobiles
+                        </div>
+                        <p>Équipement d'extraction et d'analyse des données de téléphones portables et autres appareils numériques</p>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">
+                            <span class="material-icons">hub</span>
+                            Logiciel d'analyse de réseaux
+                        </div>
+                        <p>Outil de visualisation des liens entre suspects, témoins, lieux et preuves dans des affaires complexes</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="formation-section">
+                <h3>Évaluation et certification</h3>
+                <p>Pour obtenir la certification M.A.R.Y., les candidats doivent :</p>
+                <ul>
+                    <li>Réussir tous les examens théoriques avec un score minimum de 85%</li>
+                    <li>Résoudre avec succès au moins trois cas pratiques complexes</li>
+                    <li>Rédiger un dossier d'enquête complet répondant aux standards de la division</li>
+                    <li>Démontrer leur maîtrise des techniques d'interrogatoire lors d'exercices pratiques</li>
+                    <li>Passer avec succès l'évaluation finale devant un jury de détectives expérimentés</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <h4>Exigences continues</h4>
+                    <p>Après certification, les détectives de la M.A.R.Y. doivent :</p>
+                    <ul>
+                        <li>Participer à des formations continues mensuelles</li>
+                        <li>Se tenir informés des avancées en criminalistique et techniques d'enquête</li>
+                        <li>Maintenir un taux de résolution d'affaires supérieur à 70%</li>
+                        <li>Passer une évaluation annuelle de leurs compétences</li>
+                    </ul>
+                </div>
+                
+                <div class="instructor-section">
+                    <div class="instructor-title">Instructeurs principaux</div>
+                    <div class="instructor-list">
+                        <div class="instructor-card">
+                            <div class="instructor-name">Capitaine Eleanor Briggs</div>
+                            <div class="instructor-rank">Directrice de la division M.A.R.Y.</div>
+                        </div>
+                        <div class="instructor-card">
+                            <div class="instructor-name">Lieutenant Marcus Doyle</div>
+                            <div class="instructor-rank">Expert en homicides et crimes violents</div>
+                        </div>
+                        <div class="instructor-card">
+                            <div class="instructor-name">Sergent Sophia Ramirez</div>
+                            <div class="instructor-rank">Spécialiste en profilage criminel</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="formations_new.html" class="back-to-formations">
+                <span class="material-icons">arrow_back</span> Retour aux formations
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement_new.html">Règlement</a></li>
+                    <li><a href="formations_new.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+
+</html>

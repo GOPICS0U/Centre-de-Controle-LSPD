@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procédure de Contrôle - LSPD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Material+Icons&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Styles spécifiques pour la page de procédure */
+        .procedure-step {
+            background-color: rgba(26, 86, 167, 0.1);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--lspd-accent);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .procedure-step:hover {
+            background-color: rgba(26, 86, 167, 0.15);
+            transform: translateX(5px);
+        }
+
+        .procedure-step h3 {
+            color: var(--lspd-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .procedure-step h3::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--lspd-accent);
+            color: var(--lspd-dark-blue);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .procedure-step:nth-child(1) h3::before { content: '1'; }
+        .procedure-step:nth-child(2) h3::before { content: '2'; }
+        .procedure-step:nth-child(3) h3::before { content: '3'; }
+        .procedure-step:nth-child(4) h3::before { content: '4'; }
+        .procedure-step:nth-child(5) h3::before { content: '5'; }
+        .procedure-step:nth-child(6) h3::before { content: '6'; }
+
+        .procedure-details {
+            padding-left: 20px;
+        }
+
+        .procedure-details p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .procedure-details ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .procedure-details li {
+            margin: 8px 0;
+            padding: 5px 10px;
+            background: rgba(10, 46, 92, 0.3);
+            border-left: 2px solid var(--lspd-blue);
+            border-radius: 4px;
+        }
+
+        .procedure-details li:hover {
+            background: rgba(10, 46, 92, 0.5);
+            transform: translateX(3px);
+        }
+
+        .warning-box {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .warning-box h4 {
+            color: #e74c3c;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-box h4::before {
+            content: '⚠️';
+            font-size: 1.2rem;
+        }
+
+        .tip-box {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .tip-box h4 {
+            color: #27ae60;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-box h4::before {
+            content: '💡';
+            font-size: 1.2rem;
+        }
+
+        .procedure-image {
+            width: 100%;
+            max-width: 600px;
+            border-radius: var(--border-radius);
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .procedure-image:hover {
+            transform: scale(1.02);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--lspd-accent);
+            color: var(--lspd-dark-blue);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .procedure-step {
+                padding: 15px;
+            }
+            
+            .procedure-details {
+                padding-left: 10px;
+            }
+            
+            .procedure-details ul {
+                padding-left: 15px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">LSPD - Alkia RP</div>
+            <div>
+                <a href="index_new.html">Accueil</a>
+                <a href="index_new.html#section4">Rapports</a>
+                <a href="reglement_new.html">Règlement L.S.P.D.</a>
+                <div class="dropdown">
+                    <a>Codes RADIO</a>
+                    <div class="dropdown-content">
+                        <a href="bases-codes.html">Les Bases</a>
+                        <a href="code-terrestre.html">Terrestre</a>
+                        <a href="code-ASD.html">ASD</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Procédures</a>
+                    <div class="dropdown-content">
+                        <a href="controle_new.html">Contrôle</a>
+                        <a href="arrestation_new.html">Arrestation</a>
+                        <a href="DM_new.html">Droits Miranda</a>
+                        <a href="I&MED_new.html">Interrogatoire et M.E.D.</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>DEFCON's</a>
+                    <div class="dropdown-content">
+                        <a href="DF2_new.html">DEFCON 2</a>
+                        <a href="DF3_new.html">DEFCON 3</a>
+                        <a href="DF5_new.html">DEFCON 5</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a>Formations</a>
+                    <div class="dropdown-content">
+                        <a href="formations_new.html">Toutes les formations</a>
+                        <a href="formation_swat.html">S.W.A.T.</a>
+                        <a href="formation_asd.html">A.S.D.</a>
+                        <a href="formation_mary.html">M.A.R.Y.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Procédure de Contrôle</h1>
+        <p>Guide détaillé pour effectuer un contrôle routier en toute sécurité</p>
+    </header>
+
+    <main>
+        <section class="fade-up">
+            <h2>Procédure Standard de Contrôle Routier</h2>
+            
+            <div class="procedure-step">
+                <h3>Préparation et approche</h3>
+                <div class="procedure-details">
+                    <p>Avant d'initier un contrôle routier, assurez-vous de suivre ces étapes préliminaires :</p>
+                    <ul>
+                        <li>Activez les gyrophares et la sirène pour signaler au conducteur de s'arrêter</li>
+                        <li>Informez le dispatch de votre position et de l'immatriculation du véhicule</li>
+                        <li>Choisissez un emplacement sécurisé pour effectuer l'arrêt</li>
+                        <li>Positionnez votre véhicule de patrouille légèrement décalé par rapport au véhicule contrôlé</li>
+                    </ul>
+                    
+                    <div class="tip-box">
+                        <h4>Conseil de sécurité</h4>
+                        <p>Stationnez votre véhicule de manière à créer une zone de sécurité entre vous et la circulation. Votre véhicule doit être positionné légèrement en quinconce pour vous protéger des autres usagers de la route.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Contact initial avec le conducteur</h3>
+                <div class="procedure-details">
+                    <p>L'approche initiale est cruciale pour établir le ton de l'interaction :</p>
+                    <ul>
+                        <li>Approchez le véhicule par le côté passager lorsque c'est possible pour éviter la circulation</li>
+                        <li>Observez l'intérieur du véhicule pour détecter tout mouvement suspect</li>
+                        <li>Saluez poliment le conducteur et présentez-vous</li>
+                        <li>Expliquez clairement la raison du contrôle</li>
+                        <li>Demandez les documents du conducteur (permis, carte grise, assurance)</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4>Point d'attention</h4>
+                        <p>Restez vigilant pendant toute la durée du contrôle. Gardez une main libre et maintenez une distance de sécurité avec le conducteur. Ne vous positionnez jamais directement devant ou derrière le véhicule.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Vérification des documents</h3>
+                <div class="procedure-details">
+                    <p>Procédez à une vérification minutieuse des documents fournis :</p>
+                    <ul>
+                        <li>Vérifiez la validité du permis de conduire</li>
+                        <li>Contrôlez la carte grise et l'assurance du véhicule</li>
+                        <li>Comparez les informations avec celles du conducteur et du véhicule</li>
+                        <li>Effectuez une recherche dans la base de données pour vérifier les antécédents</li>
+                    </ul>
+                    
+                    <p>Si vous devez retourner à votre véhicule pour effectuer des vérifications :</p>
+                    <ul>
+                        <li>Informez le conducteur que vous allez vérifier ses documents</li>
+                        <li>Demandez-lui de rester dans son véhicule</li>
+                        <li>Gardez un œil sur le véhicule contrôlé pendant vos vérifications</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Inspection du véhicule</h3>
+                <div class="procedure-details">
+                    <p>Si nécessaire, procédez à une inspection visuelle du véhicule :</p>
+                    <ul>
+                        <li>Vérifiez l'état général du véhicule (pneus, phares, etc.)</li>
+                        <li>Contrôlez la présence des équipements obligatoires</li>
+                        <li>Observez tout signe d'infraction visible (modification non homologuée, etc.)</li>
+                    </ul>
+                    
+                    <div class="tip-box">
+                        <h4>Rappel juridique</h4>
+                        <p>Une fouille approfondie du véhicule nécessite soit le consentement du conducteur, soit des motifs raisonnables de soupçonner une infraction grave. Respectez toujours les droits du citoyen.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Conclusion du contrôle</h3>
+                <div class="procedure-details">
+                    <p>Terminez le contrôle de manière professionnelle :</p>
+                    <ul>
+                        <li>Informez clairement le conducteur du résultat du contrôle</li>
+                        <li>En cas d'infraction, expliquez la nature de celle-ci et les sanctions applicables</li>
+                        <li>Remettez les documents au conducteur</li>
+                        <li>Donnez des instructions claires sur la suite (contravention, convocation, etc.)</li>
+                        <li>Remerciez le conducteur pour sa coopération</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4>Important</h4>
+                        <p>Même en cas d'infraction, restez courtois et professionnel. Votre comportement représente l'image du LSPD auprès des citoyens.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-step">
+                <h3>Rapport et suivi</h3>
+                <div class="procedure-details">
+                    <p>Après le contrôle, complétez les tâches administratives :</p>
+                    <ul>
+                        <li>Informez le dispatch de la fin du contrôle</li>
+                        <li>Rédigez un rapport détaillé si nécessaire</li>
+                        <li>Enregistrez toutes les infractions constatées dans le système</li>
+                        <li>Archivez correctement les copies des contraventions</li>
+                    </ul>
+                    
+                    <div class="tip-box">
+                        <h4>Conseil</h4>
+                        <p>Un rapport bien rédigé est essentiel pour le suivi judiciaire. Soyez précis, factuel et incluez tous les détails pertinents de l'intervention.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-up">
+            <h2>Situations particulières</h2>
+            
+            <div class="warning-box">
+                <h4>Conducteur non coopératif</h4>
+                <p>Si le conducteur refuse de coopérer ou devient hostile :</p>
+                <ul>
+                    <li>Maintenez votre calme et restez professionnel</li>
+                    <li>Appelez des renforts si nécessaire</li>
+                    <li>Expliquez clairement les conséquences d'un refus d'obtempérer</li>
+                    <li>Utilisez la force uniquement si la situation l'exige, de manière proportionnée</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <h4>Véhicule suspect</h4>
+                <p>Si vous avez des raisons de croire que le véhicule est impliqué dans une activité criminelle :</p>
+                <ul>
+                    <li>Demandez immédiatement des renforts</li>
+                    <li>Maintenez une distance de sécurité accrue</li>
+                    <li>Suivez les protocoles de contrôle à haut risque</li>
+                    <li>Soyez prêt à réagir rapidement si la situation dégénère</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <a href="#" class="back-to-top" id="backToTop">
+        <span class="material-icons">arrow_upward</span>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">LSPD</div>
+                <p>Los Santos Police Department</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index_new.html">Accueil</a></li>
+                    <li><a href="reglement_new.html">Règlement</a></li>
+                    <li><a href="formations_new.html">Formations</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>Quartier Général LSPD</p>
+                <p>Los Santos, San Andreas</p>
+                <p>Urgence: 911</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Système de gestion LSPD | P1CS0U - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+    <script>
+        // Script pour le bouton "Retour en haut"
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            
+            // Afficher/masquer le bouton en fonction du défilement
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            // Défilement fluide vers le haut
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
