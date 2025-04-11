@@ -1,6 +1,6 @@
 # Centre de Contrôle LSPD - GTA RP
 
-![LSPD Logo](https://i.imgur.com/8ZXJAcT.png)
+![LSPD Logo](https://i.imgur.com/AMdUL3D.jpeg)
 
 ## Description
 
