@@ -46,28 +46,31 @@ Le Centre de Contrôle LSPD est une application web conçue pour les serveurs GT
 
 ```
 Centre-de-Controle-LSPD/
-├── index.html              # Page d'accueil
-├── rapport.html            # Formulaire de rapport standard
-├── med.html                # Formulaire de M.E.D.
-├── saisie.html             # Formulaire de saisie d'objets
-├── plainte.html            # Formulaire de plainte
-├── rapport-agent.html      # Rapport d'agent
-├── reglement.html          # Règlement LSPD
-├── formations.html         # Formations disponibles
-├── bases-codes.html        # Codes radio de base
-├── code-terrestre.html     # Codes radio terrestres
-├── code-ASD.html           # Codes ASD
-├── controle.html           # Procédure de contrôle
-├── arrestation.html        # Procédure d'arrestation
-├── DM.html                 # Droits Miranda
-├── I&MED.html              # Interrogatoire et M.E.D.
-├── DF2.html                # DEFCON 2
-├── DF3.html                # DEFCON 3
-├── DF5.html                # DEFCON 5
-├── style.css               # Styles CSS originaux
-├── style2.css              # Styles CSS améliorés
-├── scripts.js              # Scripts JavaScript
-└── img/                    # Dossier d'images
+├── index_new.html              # Page d'accueil
+├── rapport_new.html            # Formulaire de rapport standard
+├── med.html                    # Formulaire de M.E.D.
+├── saisie.html                 # Formulaire de saisie d'objets
+├── plainte.html                # Formulaire de plainte
+├── rapport_agent.html          # Rapport d'agent
+├── reglement_new.html          # Règlement LSPD
+├── formation_new.html          # Formations disponibles
+├── formation_asd.html          # Formations Air Support Division
+├── formation_mary.html         # Formations MARY
+├── formation_swat.html         # Formations SWAT
+├── bases-codes.html            # Codes radio de base
+├── code-terrestre.html         # Codes radio terrestres
+├── code-ASD.html               # Codes ASD
+├── controle_new.html           # Procédure de contrôle
+├── arrestation_new.html        # Procédure d'arrestation
+├── DM_new.html                 # Droits Miranda
+├── I&MED_new.html              # Interrogatoire et M.E.D.
+├── DF2_new.html                # DEFCON 2
+├── DF3_new.html                # DEFCON 3
+├── DF5_new.html                # DEFCON 5
+├── style.css                   # Styles CSS originaux
+├── style2.css                  # Styles CSS améliorés
+├── scripts.js                  # Scripts JavaScript
+└── img/                        # Dossier d'images
 ```
 
 ## Technologies utilisées
